@@ -51,7 +51,9 @@
 
         $.ajax({
             type: "GET",
-            contentType: "application/json; charset=utf-8",
+            dataType:"json",
+            authorization:"Basic asdfasfasgdvadfsfa",
+            // contentType: "application/json; charset=utf-8",
             url: "http://localhost:8081/LibraryManagement_war/api/v1/getAllBooks"
         }).success(function(data){
             var jsondata = JSON.parse(data);

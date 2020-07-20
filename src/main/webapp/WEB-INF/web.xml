@@ -8,15 +8,15 @@
     <welcome-file-list>
         <welcome-file>error.do</welcome-file>
     </welcome-file-list>
-    <filter>
-        <filter-name>CorsFilter</filter-name>
-        <filter-class>lk.ac.cmb.ucsc.LibraryManagementFrontEnd.CORSFilter</filter-class>
-    </filter>
+<!--    <filter>-->
+<!--        <filter-name>CorsFilter</filter-name>-->
+<!--        <filter-class>lk.ac.cmb.ucsc.LibraryManagementFrontEnd.CORSFilter</filter-class>-->
+<!--    </filter>-->
 
-    <filter-mapping>
-        <filter-name>CorsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+<!--    <filter-mapping>-->
+<!--        <filter-name>CorsFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--    </filter-mapping>-->
 
     <!--    <listener>
             <listener-class>
