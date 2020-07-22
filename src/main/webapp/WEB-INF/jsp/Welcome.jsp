@@ -170,6 +170,7 @@
         left: 23%;
         height: 100%;
         vertical-align: middle;
+        margin-left: -23%;
         /*center: 0%;*/
     }
 
@@ -288,15 +289,10 @@
             row.replaceWith(html);
         };
         getBooksData = function () {
-            var url = "http://localhost:8081/LibraryManagement_war/api/v1/getAllBooks";
+            var url = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
             $.ajax({
-                async: false,
                 type: "GET",
-                crossDomain: true,
-                contentType: "application/json; charset=utf-8",
-                url: "http://localhost:8081/LibraryManagement_war/api/v1/getAllBooks",
-                datatype: "jsonp",
-                data: { dept: inp}
+                url: "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks",
             }).success(function(data){
                 var jsondata = JSON.parse(data);
 
@@ -594,7 +590,7 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"
                                         aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="viewbooksmodalid">List of all the books in LMS</h4>
+                                <h4 class="modal-title" id="viewbooksmodalid">List of all the books in Library</h4>
                             </div>
                             <div class="modal-body">
                                 <c:forEach var="book" items="${books}">

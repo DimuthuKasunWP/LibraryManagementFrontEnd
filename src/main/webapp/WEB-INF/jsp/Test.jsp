@@ -47,59 +47,69 @@
 <script>
 
     $(document).ready(function () {
-        var url = "http://localhost:8081/LibraryManagement_war/api/v1/getAllBooks";
+        var myUrl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
+
+
 
         $.ajax({
             type: "GET",
-            dataType:"json",
-            authorization:"Basic asdfasfasgdvadfsfa",
-            // contentType: "application/json; charset=utf-8",
-            url: "http://localhost:8081/LibraryManagement_war/api/v1/getAllBooks"
-        }).success(function(data){
-            var jsondata = JSON.parse(data);
+            contentType: "application/json",
+            url: myUrl,
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log("this is good");
+                console.log("" + JSON.stringify(data));
+                var booksRecord = data;
+                $('#container').append('<br><br><p style="text-align: center; font-weight: bold">Books added/updated by all librarians');
+                var html = '<br><br><br><div class="table-responsive">' +
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>Book ID </th>' +
+                    '<th>Email </th>' +
+                    '<th>Action </th>' +
+                    '<th>Status </th>' +
+                    '<th>ISBN </th>' +
+                    '<th>Author </th>' +
+                    '<th># of copies </th>' +
+                    '<th>Title </th>' +
+                    '<th>Status </th>' +
+                    '</tr>';
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if (data.hasOwnProperty(key)) {
+                            var val = data[key];
+                        }
+                        for (var i in val) {
+                            html = html + '<tr>';
+                            html = html + '<td>' + val[i].bookId + '</td>';
+                            html = html + '<td>' + val[i].userName + '</td>';
+                            html = html + '<td>' + val[i].action + '</td>';
+                            html = html + '<td>' + val[i].status + '</td>';
+                            html = html + '<td>' + val[i].isbn + '</td>';
+                            html = html + '<td>' + val[i].author + '</td>';
+                            html = html + '<td>' + val[i].noOfCopies + '</td>';
+                            html = html + '<td>' + val[i].bookName + '</td>';
+                            html = html + '<td>' + val[i].status + '</td>';
+                            html = html + '</tr>';
+                        }
+                    }
+                }
+                html = html + '</table>';
+                html = html + '</div>';
+                $('#container').append(html);
 
-            console.log("here");
-            console.log("" + data);
-            var jsonData = data;
-            console.log(jsonData.length);
-            console.log(jsonData);
-            var html = '<br><br><br><div class="table-responsive">' +
-                '<table class="table">' +
-                '<thead>' +
-                '<tr>' +
-                '<th>ID </th>' +
-                '<th>ISBN </th>' +
-                '<th>Book Name </th>' +
-                '<th>Writer </th>' +
-                '<th>Publisher </th>' +
-                '<th>Price </th>' +
-                '<th>Year </th>' +
-                '<th>No. of copies </th>' +
-                '<th>Edition</th>' +
-                '<th align="center" >Actions</th>' +
-                '</tr>';
-            for (i = 0; i < jsonData.length; i++) {
-                //console.log("title string"+JSON.stringify(jsonData[i]));
-                html = html + '<tr id = ' + jsonData[i].id + '>';
-                html = html + '<td >' + jsonData[i].id + '</td>';
-                html = html + '<td>' + jsonData[i].isbn + '</td>';
-                html = html + '<td>' + jsonData[i].bookName + '</td>';
-                html = html + '<td>' + jsonData[i].writer + '</td>';
-                html = html + '<td>' + jsonData[i].publisher + '</td>';
-                html = html + '<td>' + jsonData[i].price + '</td>';
-                html = html + '<td>' + jsonData[i].manufacturedYear + '</td>';
-                html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
-                html = html + '<td>' + jsonData[i].edition + '</td>';
-                var singleObj = jsonData[i];
-                html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
-                html = html + '</tr>';
+            },
+            error: function (xhr, status, error) {
+
+                console.log("status"+status);
+                console.log("error"+error)
+                console.log("text : ", xhr.responseText);
+
+
             }
-            html = html + '</table>';
-            html = html + '</div>';
-            document.find('#container').append(html);
-        }).done(function(){
-            console.log("[AJAX] Complete: JSON WSDL Lookup");
-        });
 
     })
 </script>
