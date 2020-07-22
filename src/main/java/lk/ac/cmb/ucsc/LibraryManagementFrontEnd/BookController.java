@@ -14,6 +14,6 @@ public class BookController {
     @GetMapping(path = "/welcome")
     @CrossOrigin
     public ModelAndView welcome(){
-        return new ModelAndView("Test");
+        return new ModelAndView("Welcome");
     }
 }
