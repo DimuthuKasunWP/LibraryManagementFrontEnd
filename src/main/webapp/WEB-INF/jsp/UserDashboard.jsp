@@ -448,17 +448,17 @@
                 <hr>
 
                 <!-- Modal for adding books-->
-<%--                <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"--%>
-<%--                     aria-hidden="true">--%>
-<%--                    <div class="modal-dialog">--%>
-<%--                        <div class="modal-content" id="addBookContent">--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <button type="button" class="close" data-dismiss="modal"--%>
-<%--                                        aria-hidden="true">&times;</button>--%>
-<%--                                <h4 class="modal-title" id="myModalLabel">Add a new book to LMS</h4>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-body">--%>
-<%--                                <!-- Add forms here -->--%>
+                <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true" style="margin-left: 33%">
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="addBookContent">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Add a new book to LMS</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Add forms here -->
 <%--                                <ul class="nav nav-tabs" id="tabContent" data-tabs="tabs">--%>
 <%--                                    <li>--%>
 <%--                                        <a href="#" id="simpleadd" data-toggle="tab"--%>
@@ -473,112 +473,112 @@
 <%--                                        </a>--%>
 <%--                                    </li>--%>
 <%--                                </ul>--%>
-<%--                                <div id="my-tab-content" class="tab-content">--%>
-<%--                                    <div class="tab-pane active" id="a">--%>
-<%--                                        <form:form class="form-style-9" method="post"--%>
-<%--                                                   action="${pageContext.request.contextPath}/book/addBook/"--%>
-<%--                                                   modelAttribute="book" name="simpleaddform" id="simpleaddform"--%>
-<%--                                                   style="display: none">--%>
-<%--                                            <ul>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="text" id="isbn"--%>
-<%--                                                           class="field-style field-full align-none" name="isbn"--%>
-<%--                                                           placeholder="ISBN" required>--%>
-<%--                                                </li>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="text" name="callnumber" size="10"--%>
-<%--                                                           class="field-style field-split align-left"--%>
-<%--                                                           placeholder="Call Number" required/>--%>
-<%--                                                    <input type="text" name="location"--%>
-<%--                                                           class="field-style field-split align-right"--%>
-<%--                                                           placeholder="Location" required/>--%>
-<%--                                                </li>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="number" min="1" name="num_of_copies"--%>
-<%--                                                           class="field-style field-split align-left"--%>
-<%--                                                           placeholder="# of copies" required/>--%>
-<%--                                                    <input type="text" name="keywords"--%>
-<%--                                                           class="field-style field-split align-right"--%>
-<%--                                                           placeholder="Keywords" required/>--%>
-<%--                                                    <select class="selectpicker" name="current_status"--%>
-<%--                                                            data-style="btn-info" required>--%>
-<%--                                                        <option>Available</option>--%>
-<%--                                                        <option>Hold</option>--%>
-<%--                                                        <option>Wait-Listed</option>--%>
-<%--                                                    </select>--%>
+                                <div id="my-tab-content" class="tab-content">
+                                    <div class="tab-pane active" id="a">
+                                        <form:form class="form-style-9" method="post"
+                                                   action="${pageContext.request.contextPath}/book/addBook/"
+                                                   modelAttribute="book" name="simpleaddform" id="simpleaddform"
+                                                   style="display: none">
+                                            <ul>
+                                                <li>
+                                                    <input type="text" id="isbn"
+                                                           class="field-style field-full align-none" name="isbn"
+                                                           placeholder="ISBN" required>
+                                                </li>
+                                                <li>
+                                                    <input type="text" name="callnumber" size="10"
+                                                           class="field-style field-split align-left"
+                                                           placeholder="Call Number" required/>
+                                                    <input type="text" name="location"
+                                                           class="field-style field-split align-right"
+                                                           placeholder="Location" required/>
+                                                </li>
+                                                <li>
+                                                    <input type="number" min="1" name="num_of_copies"
+                                                           class="field-style field-split align-left"
+                                                           placeholder="# of copies" required/>
+                                                    <input type="text" name="keywords"
+                                                           class="field-style field-split align-right"
+                                                           placeholder="Keywords" required/>
+                                                    <select class="selectpicker" name="current_status"
+                                                            data-style="btn-info" required>
+                                                        <option>Available</option>
+                                                        <option>Hold</option>
+                                                        <option>Wait-Listed</option>
+                                                    </select>
 
-<%--                                                </li>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="submit" value="Add Book"/>--%>
-<%--                                                </li>--%>
-<%--                                            </ul>--%>
-<%--                                        </form:form>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="tab-pane" id="b">--%>
+                                                </li>
+                                                <li>
+                                                    <input type="submit" value="Add Book"/>
+                                                </li>
+                                            </ul>
+                                        </form:form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="b">
 
-<%--                                    <form:form class="form-style-9" method="post"--%>
-<%--                                               action="${pageContext.request.contextPath}/book/addBook/"--%>
-<%--                                               modelAttribute="book" id="advancedaddform" style="display: none">--%>
-<%--                                        <ul>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="text" class="field-style field-split align-left"--%>
-<%--                                                       name="isbn" placeholder="ISBN" required>--%>
-<%--                                                <input type="text" name="title"--%>
-<%--                                                       class="field-style field-split align-right" placeholder="Title"--%>
-<%--                                                       required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="text" name="author"--%>
-<%--                                                       class="field-style field-split align-left" placeholder="Author"--%>
-<%--                                                       required/>--%>
-<%--                                                <input type="text" name="publisher"--%>
-<%--                                                       class="field-style field-split align-right"--%>
-<%--                                                       placeholder="Publisher" required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="text" name="year_of_publication"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="Publication Year" required/>--%>
-<%--                                                <input type="text" name="location"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="Library Location" required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="number" min="1" name="num_of_copies"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="# of Copies" required/>--%>
-<%--                                                <input type="text" name="callnumber" size="10"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="Call Number" required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <select class="selectpicker" name="current_status"--%>
-<%--                                                        data-style="btn-info" required>--%>
-<%--                                                    <option>Available</option>--%>
-<%--                                                    <option>Hold</option>--%>
-<%--                                                    <option>Wait-Listed</option>--%>
-<%--                                                </select>--%>
-<%--                                                <input type="text" name="keywords"--%>
-<%--                                                       class="field-style field-full align-none"--%>
-<%--                                                       placeholder="Keywords" required/>--%>
-<%--                                            </li>--%>
+                                    <form:form class="form-style-9" method="post"
+                                               action="${pageContext.request.contextPath}/book/addBook/"
+                                               modelAttribute="book" id="advancedaddform" style="display: none">
+                                        <ul>
+                                            <li>
+                                                <input type="text" class="field-style field-split align-left"
+                                                       name="isbn" placeholder="ISBN" required>
+                                                <input type="text" name="title"
+                                                       class="field-style field-split align-right" placeholder="Title"
+                                                       required/>
+                                            </li>
+                                            <li>
+                                                <input type="text" name="author"
+                                                       class="field-style field-split align-left" placeholder="Author"
+                                                       required/>
+                                                <input type="text" name="publisher"
+                                                       class="field-style field-split align-right"
+                                                       placeholder="Publisher" required/>
+                                            </li>
+                                            <li>
+                                                <input type="text" name="year_of_publication"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="Publication Year" required/>
+                                                <input type="text" name="location"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="Library Location" required/>
+                                            </li>
+                                            <li>
+                                                <input type="number" min="1" name="num_of_copies"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="# of Copies" required/>
+                                                <input type="text" name="callnumber" size="10"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="Call Number" required/>
+                                            </li>
+                                            <li>
+                                                <select class="selectpicker" name="current_status"
+                                                        data-style="btn-info" required>
+                                                    <option>Available</option>
+                                                    <option>Hold</option>
+                                                    <option>Wait-Listed</option>
+                                                </select>
+                                                <input type="text" name="keywords"
+                                                       class="field-style field-full align-none"
+                                                       placeholder="Keywords" required/>
+                                            </li>
 
-<%--                                            <li>--%>
-<%--                                                <input type="submit" value="Add Book"/>--%>
-<%--                                            </li>--%>
-<%--                                        </ul>--%>
-<%--                                    </form:form>--%>
-<%--                                </div>--%>
-<%--                                &lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-footer">--%>
-<%--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
-<%--                                &lt;%&ndash;<button type="button" class="btn btn-primary">Add Book </button>&ndash;%&gt;--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                                            <li>
+                                                <input type="submit" value="Add Book"/>
+                                            </li>
+                                        </ul>
+                                    </form:form>
+                                </div>
+                                <%--</div>--%>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <%--<button type="button" class="btn btn-primary">Add Book </button>--%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- END: Modal for adding books-->
 
                 <!-- Modal for viewing books -->
@@ -611,27 +611,27 @@
                 </div>
                 <!-- END: Modal for viewing books -->
 
-<%--                <div class="modal fade" id="searchBooksModal" tabindex="-1" role="dialog"--%>
-<%--                     aria-labelledby="myModalLabel"--%>
-<%--                     aria-hidden="true">--%>
-<%--                    <div class="modal-dialog">--%>
-<%--                        <div class="modal-content" id="searchBooksContent">--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <button type="button" class="close" data-dismiss="modal"--%>
-<%--                                        aria-hidden="true">&times;</button>--%>
-<%--                                <h4 class="modal-title" id="searchbooksmodalid">Search Books</h4>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-body">--%>
-<%--                                <form:form class="form-style-9" method="post"--%>
-<%--                                           action="${pageContext.request.contextPath}/user/searchBook"--%>
-<%--                                           modelAttribute="book" id="searchbooksform">--%>
-<%--                                    <ul>--%>
-<%--                                        <li>--%>
-<%--                                            <input type="text" class="field-style field-split align-left"--%>
-<%--                                                   name="isbn" placeholder="ISBN">--%>
+                <div class="modal fade" id="searchBooksModal" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel"
+                     aria-hidden="true" style="margin-left: 33%">
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="searchBooksContent">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="searchbooksmodalid">Search Books</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form:form class="form-style-9" method="post"
+                                           action="${pageContext.request.contextPath}/user/searchBook"
+                                           modelAttribute="book" id="searchbooksform">
+                                    <ul>
+                                        <li>
+                                            <input type="text" class="field-style field-split align-left"
+                                                   name="isbn" placeholder="ISBN">
 <%--                                            <input type="text" name="title"--%>
 <%--                                                   class="field-style field-split align-right" placeholder="Title"/>--%>
-<%--                                        </li>--%>
+                                        </li>
 <%--                                        <li>--%>
 <%--                                            <input type="text" name="author"--%>
 <%--                                                   class="field-style field-split align-left" placeholder="Author"/>--%>
@@ -668,17 +668,17 @@
 <%--                                        </li>--%>
 
 <%--                                        <li>--%>
-<%--                                            <input type="submit" value="Search now"/>--%>
-<%--                                        </li>--%>
-<%--                                    </ul>--%>
-<%--                                </form:form>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-footer">--%>
-<%--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                                            <input type="submit" value="Search now"/>
+                                        </li>
+                                    </ul>
+                                </form:form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="btn-group btn-group-justified">
