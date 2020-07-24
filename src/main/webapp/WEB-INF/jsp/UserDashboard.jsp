@@ -278,14 +278,14 @@
             html = html + '<td id="td4"><input type="text" class="mytext" name="author" value=\"' + author + '\"' + '></td>';
             html = html + '<td id="td5"><input type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
             html = html + '<td id="td6"><input type="text" class="mytext" name="location" value=\"' + price + '\"' + '></td>';
-            html = html + '<td id="td7"><input type="text" class="mytext" size="10" name="callnumber" value=\"' + callNumber + '\"' + '></td>';
+            html = html + '<td id="td7"><input type="text" class="mytext" size="10" name="callnumber" value=\"' + manufacturedYear + '\"' + '></td>';
             html = html + '<td id="td8"><input type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
-            html = html + '<td id="td9"><input type="text" class="mytext" name="keywords" value=\"' + keywords + '\"' + '></td>';
-            html = html + '<td>' + '  <button class="btn btn-info" id=' + bookid + ' onClick="updateBook(\'' + bookid + '\',\'' + bookid + '\',\'' + isbn + '\',\'' + title + '\',\'' + author + '\',\'' + publisher + '\',\'' + price + '\',\'' + manufacturedYear + '\',\'' + numberOfCopies + '\',\'' + edition + '\')">Edit</button> <button type="submit" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+            html = html + '<td id="td9"><input type="text" class="mytext" name="keywords" value=\"' + edition + '\"' + '></td>';
+            html = html + '<td>' + '  <button class="btn btn-info" id=' + bookid + ' onClick="updateBook(\'' + bookid + '\',\'' + bookid + '\',\'' + isbn + '\',\'' + title + '\',\'' + author + '\',\'' + publisher + '\',\'' + price + '\',\'' + manufacturedYear + '\',\'' + numberOfCopies + '\',\'' + edition + '\')">Edit</button>' + '</td>';
             html = html + '</tr>';
             html = html + '</form>';
             html = html + '</div>';
-            row = $('#' + rowId);
+            const row = $('#' + rowId);
             row.replaceWith(html);
         };
         getBooksData = function () {
@@ -303,7 +303,7 @@
                 var jsonData = data;
                 console.log(jsonData.length);
                 console.log(jsonData);
-                var html = '<br><br><br><div class="table-responsive">' +
+                let html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
                     '<tr>' +
@@ -509,7 +509,7 @@
 
                                                 </li>
                                                 <li>
-                                                    <input type="submit" value="Add Book"/>
+                                                    <input id="add" type="button" value="Add Book"/>
                                                 </li>
                                             </ul>
                                         </form:form>
@@ -668,7 +668,7 @@
 <%--                                        </li>--%>
 
 <%--                                        <li>--%>
-                                            <input type="submit" value="Search now"/>
+                                            <input id="search" type="button" value="Search now"/>
                                         </li>
                                     </ul>
                                 </form:form>
