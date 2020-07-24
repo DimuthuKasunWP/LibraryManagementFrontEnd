@@ -368,7 +368,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -416,7 +416,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
