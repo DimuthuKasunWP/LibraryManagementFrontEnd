@@ -391,6 +391,53 @@
         $("#searchBtn1").click(function () {
             $('#searchBooksModal').modal('show');
         });
+        $("#search").click(function (){
+            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/"
+            $.get(url, null, function (data) {
+                console.log("here");
+                console.log("" + data);
+                var mymodal = $('#viewBooksModal');
+                mymodal.find('.modal-body').text('');
+                var jsonData = data;
+                console.log(jsonData.length);
+                console.log(jsonData);
+                var html = '<br><br><br><div class="table-responsive">' +
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>ID </th>' +
+                    '<th>ISBN </th>' +
+                    '<th>Book Name </th>' +
+                    '<th>Writer </th>' +
+                    '<th>Publisher </th>' +
+                    '<th>Price </th>' +
+                    '<th>Year </th>' +
+                    '<th>No. of copies </th>' +
+                    '<th>Edition</th>' +
+                    '<th align="center" >Actions</th>' +
+                    '</tr>';
+                for (i = 0; i < jsonData.length; i++) {
+                    //console.log("title string"+JSON.stringify(jsonData[i]));
+                    html = html + '<tr id = ' + jsonData[i].id + '>';
+                    html = html + '<td >' + jsonData[i].id + '</td>';
+                    html = html + '<td>' + jsonData[i].isbn + '</td>';
+                    html = html + '<td>' + jsonData[i].bookName + '</td>';
+                    html = html + '<td>' + jsonData[i].writer + '</td>';
+                    html = html + '<td>' + jsonData[i].publisher + '</td>';
+                    html = html + '<td>' + jsonData[i].price + '</td>';
+                    html = html + '<td>' + jsonData[i].manufacturedYear + '</td>';
+                    html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
+                    html = html + '<td>' + jsonData[i].edition + '</td>';
+                    var singleObj = jsonData[i];
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                html = html + '</div>';
+                mymodal.find('.modal-body').append(html);
+            $('#searchBooksModal').modal('show');
+
+        })
         clock_popup();
     });
 
