@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("Book")
+@RequestMapping("/user")
 public class BookController {
 
-    @GetMapping(path = "/welcome")
+    @GetMapping(path = "/")
     @CrossOrigin
     public ModelAndView welcome(){
-        return new ModelAndView("Welcome");
+        return new ModelAndView("UserDashboard");
     }
 }

@@ -207,7 +207,6 @@
         var uemail = '${users.useremail}';
         console.log(uemail);
         var userid = '${users.id}';
-        console.log(userid);
         $("#loggedinusername").text(uemail);
 
 
@@ -215,7 +214,6 @@
             $('#centerpagecontent').empty();
             var url = "${pageContext.request.contextPath}/book/getAllLibUserBook";
             $.get(url, null, function (data) {
-                console.log("here");
                 console.log("" + JSON.stringify(data));
                 var booksRecord = data;
                 $('#centerpagecontent').append('<br><br><p style="text-align: center; font-weight: bold">Books added/updated by all librarians');
@@ -278,14 +276,14 @@
             html = html + '<td id="td4"><input type="text" class="mytext" name="author" value=\"' + author + '\"' + '></td>';
             html = html + '<td id="td5"><input type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
             html = html + '<td id="td6"><input type="text" class="mytext" name="location" value=\"' + price + '\"' + '></td>';
-            html = html + '<td id="td7"><input type="text" class="mytext" size="10" name="callnumber" value=\"' + callNumber + '\"' + '></td>';
+            html = html + '<td id="td7"><input type="text" class="mytext" size="10" name="callnumber" value=\"' + manufacturedYear + '\"' + '></td>';
             html = html + '<td id="td8"><input type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
-            html = html + '<td id="td9"><input type="text" class="mytext" name="keywords" value=\"' + keywords + '\"' + '></td>';
-            html = html + '<td>' + '  <button class="btn btn-info" id=' + bookid + ' onClick="updateBook(\'' + bookid + '\',\'' + bookid + '\',\'' + isbn + '\',\'' + title + '\',\'' + author + '\',\'' + publisher + '\',\'' + price + '\',\'' + manufacturedYear + '\',\'' + numberOfCopies + '\',\'' + edition + '\')">Edit</button> <button type="submit" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+            html = html + '<td id="td9"><input type="text" class="mytext" name="keywords" value=\"' + edition + '\"' + '></td>';
+            html = html + '<td>' + '  <button class="btn btn-info" id=' + bookid + ' onClick="updateBook(\'' + bookid + '\',\'' + bookid + '\',\'' + isbn + '\',\'' + title + '\',\'' + author + '\',\'' + publisher + '\',\'' + price + '\',\'' + manufacturedYear + '\',\'' + numberOfCopies + '\',\'' + edition + '\')">Edit</button>' + '</td>';
             html = html + '</tr>';
             html = html + '</form>';
             html = html + '</div>';
-            row = $('#' + rowId);
+            const row = $('#' + rowId);
             row.replaceWith(html);
         };
         getBooksData = function () {
@@ -296,14 +294,10 @@
             }).success(function(data){
                 var jsondata = JSON.parse(data);
 
-                console.log("here");
-                console.log("" + data);
                 var mymodal = $('#viewBooksModal');
                 mymodal.find('.modal-body').text('');
                 var jsonData = data;
-                console.log(jsonData.length);
-                console.log(jsonData);
-                var html = '<br><br><br><div class="table-responsive">' +
+                let html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
                     '<tr>' +
@@ -331,7 +325,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -342,13 +336,10 @@
             });
 
             $.get(url, null, function (data) {
-                console.log("here");
-                console.log("" + data);
+
                 var mymodal = $('#viewBooksModal');
                 mymodal.find('.modal-body').text('');
                 var jsonData = data;
-                console.log(jsonData.length);
-                console.log(jsonData);
                 var html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
@@ -377,7 +368,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -391,13 +382,57 @@
         $("#searchBtn1").click(function () {
             $('#searchBooksModal').modal('show');
         });
-        clock_popup();
+        $("#search").click(function () {
+            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getBookByNW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val();
+            $.get(url, null, function (data) {
+                var mymodal = $('#searchBooksModal');
+                mymodal.find('.modal-body').text('');
+                var jsonData = data;
+                var html = '<br><br><br><div class="table-responsive">' +
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>ID </th>' +
+                    '<th>ISBN </th>' +
+                    '<th>Book Name </th>' +
+                    '<th>Writer </th>' +
+                    '<th>Publisher </th>' +
+                    '<th>Price </th>' +
+                    '<th>Year </th>' +
+                    '<th>No. of copies </th>' +
+                    '<th>Edition</th>' +
+                    '<th align="center" >Actions</th>' +
+                    '</tr>';
+                for (i = 0; i < jsonData.length; i++) {
+                    //console.log("title string"+JSON.stringify(jsonData[i]));
+                    html = html + '<tr id = ' + jsonData[i].id + '>';
+                    html = html + '<td >' + jsonData[i].id + '</td>';
+                    html = html + '<td>' + jsonData[i].isbn + '</td>';
+                    html = html + '<td>' + jsonData[i].bookName + '</td>';
+                    html = html + '<td>' + jsonData[i].writer + '</td>';
+                    html = html + '<td>' + jsonData[i].publisher + '</td>';
+                    html = html + '<td>' + jsonData[i].price + '</td>';
+                    html = html + '<td>' + jsonData[i].manufacturedYear + '</td>';
+                    html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
+                    html = html + '<td>' + jsonData[i].edition + '</td>';
+                    var singleObj = jsonData[i];
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                html = html + '</div>';
+                mymodal.find('.modal-body').append(html);
+                $("#searchBooksModal").modal('close');
+            $('#viewBooksModal').modal('show');
+
+        })
     });
 
     function clock_popup() {
-        console.log("From the function clock_popup");
-        $('#datetimepicker').datetimepicker()
+        $('#datetimepicker').datetimepicker();
     }
+    })
+
 </script>
 <body>
 <h2 style="text-align: center">Welcome To Library Management System </h2>
@@ -448,17 +483,17 @@
                 <hr>
 
                 <!-- Modal for adding books-->
-<%--                <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"--%>
-<%--                     aria-hidden="true">--%>
-<%--                    <div class="modal-dialog">--%>
-<%--                        <div class="modal-content" id="addBookContent">--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <button type="button" class="close" data-dismiss="modal"--%>
-<%--                                        aria-hidden="true">&times;</button>--%>
-<%--                                <h4 class="modal-title" id="myModalLabel">Add a new book to LMS</h4>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-body">--%>
-<%--                                <!-- Add forms here -->--%>
+                <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true" style="margin-left: 33%">
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="addBookContent">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Add a new book to LMS</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Add forms here -->
 <%--                                <ul class="nav nav-tabs" id="tabContent" data-tabs="tabs">--%>
 <%--                                    <li>--%>
 <%--                                        <a href="#" id="simpleadd" data-toggle="tab"--%>
@@ -473,112 +508,112 @@
 <%--                                        </a>--%>
 <%--                                    </li>--%>
 <%--                                </ul>--%>
-<%--                                <div id="my-tab-content" class="tab-content">--%>
-<%--                                    <div class="tab-pane active" id="a">--%>
-<%--                                        <form:form class="form-style-9" method="post"--%>
-<%--                                                   action="${pageContext.request.contextPath}/book/addBook/"--%>
-<%--                                                   modelAttribute="book" name="simpleaddform" id="simpleaddform"--%>
-<%--                                                   style="display: none">--%>
-<%--                                            <ul>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="text" id="isbn"--%>
-<%--                                                           class="field-style field-full align-none" name="isbn"--%>
-<%--                                                           placeholder="ISBN" required>--%>
-<%--                                                </li>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="text" name="callnumber" size="10"--%>
-<%--                                                           class="field-style field-split align-left"--%>
-<%--                                                           placeholder="Call Number" required/>--%>
-<%--                                                    <input type="text" name="location"--%>
-<%--                                                           class="field-style field-split align-right"--%>
-<%--                                                           placeholder="Location" required/>--%>
-<%--                                                </li>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="number" min="1" name="num_of_copies"--%>
-<%--                                                           class="field-style field-split align-left"--%>
-<%--                                                           placeholder="# of copies" required/>--%>
-<%--                                                    <input type="text" name="keywords"--%>
-<%--                                                           class="field-style field-split align-right"--%>
-<%--                                                           placeholder="Keywords" required/>--%>
-<%--                                                    <select class="selectpicker" name="current_status"--%>
-<%--                                                            data-style="btn-info" required>--%>
-<%--                                                        <option>Available</option>--%>
-<%--                                                        <option>Hold</option>--%>
-<%--                                                        <option>Wait-Listed</option>--%>
-<%--                                                    </select>--%>
+                                <div id="my-tab-content" class="tab-content">
+                                    <div class="tab-pane active" id="a">
+                                        <form:form class="form-style-9" method="post"
+                                                   action="${pageContext.request.contextPath}/book/addBook/"
+                                                   modelAttribute="book" name="simpleaddform" id="simpleaddform"
+                                                   style="display: none">
+                                            <ul>
+                                                <li>
+                                                    <input type="text" id="isbn"
+                                                           class="field-style field-full align-none" name="isbn"
+                                                           placeholder="ISBN" required>
+                                                </li>
+                                                <li>
+                                                    <input type="text" name="callnumber" size="10"
+                                                           class="field-style field-split align-left"
+                                                           placeholder="Call Number" required/>
+                                                    <input type="text" name="location"
+                                                           class="field-style field-split align-right"
+                                                           placeholder="Location" required/>
+                                                </li>
+                                                <li>
+                                                    <input type="number" min="1" name="num_of_copies"
+                                                           class="field-style field-split align-left"
+                                                           placeholder="# of copies" required/>
+                                                    <input type="text" name="keywords"
+                                                           class="field-style field-split align-right"
+                                                           placeholder="Keywords" required/>
+                                                    <select class="selectpicker" name="current_status"
+                                                            data-style="btn-info" required>
+                                                        <option>Available</option>
+                                                        <option>Hold</option>
+                                                        <option>Wait-Listed</option>
+                                                    </select>
 
-<%--                                                </li>--%>
-<%--                                                <li>--%>
-<%--                                                    <input type="submit" value="Add Book"/>--%>
-<%--                                                </li>--%>
-<%--                                            </ul>--%>
-<%--                                        </form:form>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="tab-pane" id="b">--%>
+                                                </li>
+                                                <li>
+                                                    <input id="add" type="button" value="Add Book"/>
+                                                </li>
+                                            </ul>
+                                        </form:form>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="b">
 
-<%--                                    <form:form class="form-style-9" method="post"--%>
-<%--                                               action="${pageContext.request.contextPath}/book/addBook/"--%>
-<%--                                               modelAttribute="book" id="advancedaddform" style="display: none">--%>
-<%--                                        <ul>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="text" class="field-style field-split align-left"--%>
-<%--                                                       name="isbn" placeholder="ISBN" required>--%>
-<%--                                                <input type="text" name="title"--%>
-<%--                                                       class="field-style field-split align-right" placeholder="Title"--%>
-<%--                                                       required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="text" name="author"--%>
-<%--                                                       class="field-style field-split align-left" placeholder="Author"--%>
-<%--                                                       required/>--%>
-<%--                                                <input type="text" name="publisher"--%>
-<%--                                                       class="field-style field-split align-right"--%>
-<%--                                                       placeholder="Publisher" required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="text" name="year_of_publication"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="Publication Year" required/>--%>
-<%--                                                <input type="text" name="location"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="Library Location" required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <input type="number" min="1" name="num_of_copies"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="# of Copies" required/>--%>
-<%--                                                <input type="text" name="callnumber" size="10"--%>
-<%--                                                       class="field-style field-split align-left"--%>
-<%--                                                       placeholder="Call Number" required/>--%>
-<%--                                            </li>--%>
-<%--                                            <li>--%>
-<%--                                                <select class="selectpicker" name="current_status"--%>
-<%--                                                        data-style="btn-info" required>--%>
-<%--                                                    <option>Available</option>--%>
-<%--                                                    <option>Hold</option>--%>
-<%--                                                    <option>Wait-Listed</option>--%>
-<%--                                                </select>--%>
-<%--                                                <input type="text" name="keywords"--%>
-<%--                                                       class="field-style field-full align-none"--%>
-<%--                                                       placeholder="Keywords" required/>--%>
-<%--                                            </li>--%>
+                                    <form:form class="form-style-9" method="post"
+                                               action="${pageContext.request.contextPath}/book/addBook/"
+                                               modelAttribute="book" id="advancedaddform" style="display: none">
+                                        <ul>
+                                            <li>
+                                                <input type="text" class="field-style field-split align-left"
+                                                       name="isbn" placeholder="ISBN" required>
+                                                <input type="text" name="title"
+                                                       class="field-style field-split align-right" placeholder="Title"
+                                                       required/>
+                                            </li>
+                                            <li>
+                                                <input type="text" name="author"
+                                                       class="field-style field-split align-left" placeholder="Author"
+                                                       required/>
+                                                <input type="text" name="publisher"
+                                                       class="field-style field-split align-right"
+                                                       placeholder="Publisher" required/>
+                                            </li>
+                                            <li>
+                                                <input type="text" name="year_of_publication"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="Publication Year" required/>
+                                                <input type="text" name="location"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="Library Location" required/>
+                                            </li>
+                                            <li>
+                                                <input type="number" min="1" name="num_of_copies"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="# of Copies" required/>
+                                                <input type="text" name="callnumber" size="10"
+                                                       class="field-style field-split align-left"
+                                                       placeholder="Call Number" required/>
+                                            </li>
+                                            <li>
+                                                <select class="selectpicker" name="current_status"
+                                                        data-style="btn-info" required>
+                                                    <option>Available</option>
+                                                    <option>Hold</option>
+                                                    <option>Wait-Listed</option>
+                                                </select>
+                                                <input type="text" name="keywords"
+                                                       class="field-style field-full align-none"
+                                                       placeholder="Keywords" required/>
+                                            </li>
 
-<%--                                            <li>--%>
-<%--                                                <input type="submit" value="Add Book"/>--%>
-<%--                                            </li>--%>
-<%--                                        </ul>--%>
-<%--                                    </form:form>--%>
-<%--                                </div>--%>
-<%--                                &lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-footer">--%>
-<%--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
-<%--                                &lt;%&ndash;<button type="button" class="btn btn-primary">Add Book </button>&ndash;%&gt;--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                                            <li>
+                                                <input type="submit" value="Add Book"/>
+                                            </li>
+                                        </ul>
+                                    </form:form>
+                                </div>
+                                <%--</div>--%>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <%--<button type="button" class="btn btn-primary">Add Book </button>--%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- END: Modal for adding books-->
 
                 <!-- Modal for viewing books -->
@@ -611,27 +646,27 @@
                 </div>
                 <!-- END: Modal for viewing books -->
 
-<%--                <div class="modal fade" id="searchBooksModal" tabindex="-1" role="dialog"--%>
-<%--                     aria-labelledby="myModalLabel"--%>
-<%--                     aria-hidden="true">--%>
-<%--                    <div class="modal-dialog">--%>
-<%--                        <div class="modal-content" id="searchBooksContent">--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <button type="button" class="close" data-dismiss="modal"--%>
-<%--                                        aria-hidden="true">&times;</button>--%>
-<%--                                <h4 class="modal-title" id="searchbooksmodalid">Search Books</h4>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-body">--%>
-<%--                                <form:form class="form-style-9" method="post"--%>
-<%--                                           action="${pageContext.request.contextPath}/user/searchBook"--%>
-<%--                                           modelAttribute="book" id="searchbooksform">--%>
-<%--                                    <ul>--%>
-<%--                                        <li>--%>
-<%--                                            <input type="text" class="field-style field-split align-left"--%>
-<%--                                                   name="isbn" placeholder="ISBN">--%>
-<%--                                            <input type="text" name="title"--%>
-<%--                                                   class="field-style field-split align-right" placeholder="Title"/>--%>
-<%--                                        </li>--%>
+                <div class="modal fade" id="searchBooksModal" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel"
+                     aria-hidden="true" style="margin-left: 33%">
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="searchBooksContent">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="searchbooksmodalid">Search Books</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form:form class="form-style-9" method="post"
+                                           action="${pageContext.request.contextPath}/user/searchBook"
+                                           modelAttribute="book" id="searchbooksform">
+                                    <ul>
+                                        <li>
+                                            <input type="text" id="searchName" class="field-style field-split align-left"
+                                                   name="searchName" placeholder="Book Name">
+                                            <input type="text" name="searchWriter" id="searchWriter"
+                                                   class="field-style field-split align-right" placeholder="Author "/>
+                                        </li>
 <%--                                        <li>--%>
 <%--                                            <input type="text" name="author"--%>
 <%--                                                   class="field-style field-split align-left" placeholder="Author"/>--%>
@@ -668,17 +703,17 @@
 <%--                                        </li>--%>
 
 <%--                                        <li>--%>
-<%--                                            <input type="submit" value="Search now"/>--%>
-<%--                                        </li>--%>
-<%--                                    </ul>--%>
-<%--                                </form:form>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-footer">--%>
-<%--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                                            <input id="search" type="button" value="Search now"/>
+                                        </li>
+                                    </ul>
+                                </form:form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="btn-group btn-group-justified">
