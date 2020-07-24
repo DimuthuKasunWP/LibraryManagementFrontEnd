@@ -207,7 +207,6 @@
         var uemail = '${users.useremail}';
         console.log(uemail);
         var userid = '${users.id}';
-        console.log(userid);
         $("#loggedinusername").text(uemail);
 
 
@@ -215,7 +214,6 @@
             $('#centerpagecontent').empty();
             var url = "${pageContext.request.contextPath}/book/getAllLibUserBook";
             $.get(url, null, function (data) {
-                console.log("here");
                 console.log("" + JSON.stringify(data));
                 var booksRecord = data;
                 $('#centerpagecontent').append('<br><br><p style="text-align: center; font-weight: bold">Books added/updated by all librarians');
@@ -296,13 +294,9 @@
             }).success(function(data){
                 var jsondata = JSON.parse(data);
 
-                console.log("here");
-                console.log("" + data);
                 var mymodal = $('#viewBooksModal');
                 mymodal.find('.modal-body').text('');
                 var jsonData = data;
-                console.log(jsonData.length);
-                console.log(jsonData);
                 let html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
@@ -331,7 +325,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -342,13 +336,10 @@
             });
 
             $.get(url, null, function (data) {
-                console.log("here");
-                console.log("" + data);
+
                 var mymodal = $('#viewBooksModal');
                 mymodal.find('.modal-body').text('');
                 var jsonData = data;
-                console.log(jsonData.length);
-                console.log(jsonData);
                 var html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
@@ -391,16 +382,12 @@
         $("#searchBtn1").click(function () {
             $('#searchBooksModal').modal('show');
         });
-        $("#search").click(function (){
-            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/"
+        $("#search").click(function () {
+            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getBookByNW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val();
             $.get(url, null, function (data) {
-                console.log("here");
-                console.log("" + data);
-                var mymodal = $('#viewBooksModal');
+                var mymodal = $('#searchBooksModal');
                 mymodal.find('.modal-body').text('');
                 var jsonData = data;
-                console.log(jsonData.length);
-                console.log(jsonData);
                 var html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
@@ -435,16 +422,17 @@
                 html = html + '</table>';
                 html = html + '</div>';
                 mymodal.find('.modal-body').append(html);
-            $('#searchBooksModal').modal('show');
+                $("#searchBooksModal").modal('close');
+            $('#viewBooksModal').modal('show');
 
         })
-        clock_popup();
     });
 
     function clock_popup() {
-        console.log("From the function clock_popup");
-        $('#datetimepicker').datetimepicker()
+        $('#datetimepicker').datetimepicker();
     }
+    })
+
 </script>
 <body>
 <h2 style="text-align: center">Welcome To Library Management System </h2>
@@ -674,9 +662,9 @@
                                            modelAttribute="book" id="searchbooksform">
                                     <ul>
                                         <li>
-                                            <input type="text" class="field-style field-split align-left"
-                                                   name="name" placeholder="Book Name">
-                                            <input type="text" name="writer"
+                                            <input type="text" id="searchName" class="field-style field-split align-left"
+                                                   name="searchName" placeholder="Book Name">
+                                            <input type="text" name="searchWriter" id="searchWriter"
                                                    class="field-style field-split align-right" placeholder="Author "/>
                                         </li>
 <%--                                        <li>--%>
