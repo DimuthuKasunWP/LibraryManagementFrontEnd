@@ -628,9 +628,9 @@
                                     <ul>
                                         <li>
                                             <input type="text" class="field-style field-split align-left"
-                                                   name="isbn" placeholder="ISBN">
-<%--                                            <input type="text" name="title"--%>
-<%--                                                   class="field-style field-split align-right" placeholder="Title"/>--%>
+                                                   name="name" placeholder="Book Name">
+                                            <input type="text" name="writer"
+                                                   class="field-style field-split align-right" placeholder="Author "/>
                                         </li>
 <%--                                        <li>--%>
 <%--                                            <input type="text" name="author"--%>
