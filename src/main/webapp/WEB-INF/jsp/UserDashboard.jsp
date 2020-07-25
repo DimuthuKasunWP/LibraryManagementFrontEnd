@@ -290,6 +290,22 @@
                 $('#centerpagecontent').append(html);
             });
         });
+        deleteBook=function(){
+            var deleteURL = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteBook?id="+$("#updateId").val();
+            $.ajax({
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                type: "DELETE",
+                url: deleteURL
+            }).success(function(data){
+                location.reload();
+                // $("#searchBooksModal").modal('close');
+                $('#viewBooksModal').modal('show');
+            }).done(function(){
+                console.log("[AJAX] Complete: JSON WSDL Lookup");
+            });
+        }
 
         $("#viewBooksBtn").click(function () {
             getBooksData();
@@ -313,7 +329,7 @@
             html = html + '<td id="td7"><input id="updateYear" type="text" class="mytext" size="10" name="manufacturedYear" value=\"' + manufacturedYear + '\"' + '></td>';
             html = html + '<td id="td8"><input id="updateCopies" type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
             html = html + '<td id="td9"><input id="updateEdition" type="text" class="mytext" name="edition" value=\"' + edition + '\"' + '></td>';
-            html = html + '<td>' + '<button  id=' + bookid+ ' onClick="updatebookdetails()"  class="btn btn-success" >Update</button>' + '</td>';
+            html = html + '<td>' + '<button  id=' + bookid+ ' onClick="updatebookdetails()"  class="btn btn-success" >Update</button><button class="btn btn-info" onclick="deleteBook()">Delete</button>' + '</td>';
             html = html + '</tr>';
             // html = html + '</form>';
             html = html + '</div>';
@@ -359,7 +375,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button><button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button> ' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -402,7 +418,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -450,7 +466,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
