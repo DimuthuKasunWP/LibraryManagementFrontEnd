@@ -191,6 +191,40 @@
         document.getElementById(formId).style.display = "block";
     };
     $(document).ready(function () {
+        updatebookdetails=function(){
+
+            var values={
+                id:$("#updateId").val(),
+                bookName:$("#updateName").val(),
+                isbn:$("#updateIsbn").val(),
+                writer:$("#updateWriter").val(),
+                publisher:$("#updatePublisher").val(),
+                price:$("#updatePrice").val(),
+                manufacturedYear:$("#updateYear").val(),
+                num_of_copies:$("#updateCopies").val(),
+                edition:$("#updateEdition").val()
+
+            }
+            console.log("stringified values"+JSON.stringify(values));
+            values=JSON.stringify(values);
+            var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateBook";
+            $.ajax({
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                type: "PUT",
+                url: updateurl,
+                data:values
+            }).success(function(data){
+                location.reload();
+                // $("#searchBooksModal").modal('close');
+                // $('#viewBooksModal').modal('show');
+            }).done(function(){
+                console.log("[AJAX] Complete: JSON WSDL Lookup");
+            });
+
+
+        }
 
         $("#addBtn").click(function () {
             $('#addBookModal').modal('show');
@@ -268,20 +302,20 @@
         updateBook = function (rowId, bookid, isbn, title, author, publisher, price, manufacturedYear, numberOfCopies, edition) {
             var html = '';
             html = html + '<br><div id="label">';
-            html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
+            // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
             html = html + '<tr id = ' + bookid + '>';
-            html = html + '<td id="td1"><input type="text" style="width: 35px"  name="bookId" value=' + bookid + '  readonly ></td>';
-            html = html + '<td id="td2"><input type="txt" style="width: 120px" name="isbn" value=\"' + isbn + '\"' + ' readonly></td>';
-            html = html + '<td id="td3"><input type="text" class="mytext" name="title" value=\"' + title + '\"' + '></td>';
-            html = html + '<td id="td4"><input type="text" class="mytext" name="author" value=\"' + author + '\"' + '></td>';
-            html = html + '<td id="td5"><input type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
-            html = html + '<td id="td6"><input type="text" class="mytext" name="location" value=\"' + price + '\"' + '></td>';
-            html = html + '<td id="td7"><input type="text" class="mytext" size="10" name="callnumber" value=\"' + manufacturedYear + '\"' + '></td>';
-            html = html + '<td id="td8"><input type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
-            html = html + '<td id="td9"><input type="text" class="mytext" name="keywords" value=\"' + edition + '\"' + '></td>';
-            html = html + '<td>' + '  <button class="btn btn-info" id=' + bookid + ' onClick="updateBook(\'' + bookid + '\',\'' + bookid + '\',\'' + isbn + '\',\'' + title + '\',\'' + author + '\',\'' + publisher + '\',\'' + price + '\',\'' + manufacturedYear + '\',\'' + numberOfCopies + '\',\'' + edition + '\')">Edit</button>' + '</td>';
+            html = html + '<td id="td1"><input id="updateId" type="text" style="width: 35px"  name="bookId" value=' + bookid + '  readonly ></td>';
+            html = html + '<td id="td2"><input id="updateIsbn" type="txt" style="width: 120px" name="isbn" value=\"' + isbn + '\"' + ' readonly></td>';
+            html = html + '<td id="td3"><input id="updateName" type="text" class="mytext" name="name" value=\"' + title + '\"' + '></td>';
+            html = html + '<td id="td4"><input id="updateWriter" type="text" class="mytext" name="writer" value=\"' + author + '\"' + '></td>';
+            html = html + '<td id="td5"><input id="updatePublisher" type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
+            html = html + '<td id="td6"><input id="updatePrice" type="text" class="mytext" name="price" value=\"' + price + '\"' + '></td>';
+            html = html + '<td id="td7"><input id="updateYear" type="text" class="mytext" size="10" name="manufacturedYear" value=\"' + manufacturedYear + '\"' + '></td>';
+            html = html + '<td id="td8"><input id="updateCopies" type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
+            html = html + '<td id="td9"><input id="updateEdition" type="text" class="mytext" name="edition" value=\"' + edition + '\"' + '></td>';
+            html = html + '<td>' + '<button  id=' + bookid+ ' onClick="updatebookdetails()"  class="btn btn-success" >Update</button>' + '</td>';
             html = html + '</tr>';
-            html = html + '</form>';
+            // html = html + '</form>';
             html = html + '</div>';
             const row = $('#' + rowId);
             row.replaceWith(html);
@@ -325,7 +359,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button><button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -368,7 +402,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -416,12 +450,13 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> <button onClick="return updatebookdetails();" class="btn btn-success" id="updateBookFromUI" >Update</button>' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
                 html = html + '</div>';
                 mymodal.find('.modal-body').append(html);
+                // location.reload();
                 $("#searchBooksModal").modal('close');
             $('#viewBooksModal').modal('show');
 
@@ -648,7 +683,7 @@
 
                 <div class="modal fade" id="searchBooksModal" tabindex="-1" role="dialog"
                      aria-labelledby="myModalLabel"
-                     aria-hidden="true" style="margin-left: 33%">
+                     aria-hidden="true" style="width: 100%;height: 100%;left: 23%;margin-left: -23%;vertical-align: middle">
                     <div class="modal-dialog">
                         <div class="modal-content" id="searchBooksContent">
                             <div class="modal-header">
