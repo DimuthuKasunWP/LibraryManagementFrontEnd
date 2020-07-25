@@ -483,6 +483,66 @@
         $('#datetimepicker').datetimepicker();
     }
     })
+    addBookDetails=function(){
+        var values={
+            bookName:$("#addname").val(),
+            isbn:$("#addisbn").val(),
+            writer:$("#addwriter").val(),
+            publisher:$("#addpublisher").val(),
+            price:$("#addprice").val(),
+            manufacturedYear:$("#addyear").val(),
+            num_of_copies:$("#addcopies").val(),
+            edition:$("#addedition").val()
+
+        }
+        console.log("stringified values"+JSON.stringify(values));
+        values=JSON.stringify(values);
+        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        $.ajax({
+            headers:{
+                "Content-Type": "application/json",
+            },
+            type: "POST",
+            url: updateurl,
+            data:values
+        }).success(function(data){
+            location.reload();
+            // $("#searchBooksModal").modal('close');
+            // $('#viewBooksModal').modal('show');
+        }).done(function(){
+            console.log("[AJAX] Complete: JSON WSDL Lookup");
+        });
+    }
+    $('#addbook').click(function () {
+        var values={
+            bookName:$("#addname").val(),
+            isbn:$("#addisbn").val(),
+            writer:$("#addwriter").val(),
+            publisher:$("#addpublisher").val(),
+            price:$("#addprice").val(),
+            manufacturedYear:$("#addyear").val(),
+            num_of_copies:$("#addcopies").val(),
+            edition:$("#addedition").val()
+
+        }
+        console.log("stringified values"+JSON.stringify(values));
+        values=JSON.stringify(values);
+        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        $.ajax({
+            headers:{
+                "Content-Type": "application/json",
+            },
+            type: "PUT",
+            url: updateurl,
+            data:values
+        }).success(function(data){
+            location.reload();
+            // $("#searchBooksModal").modal('close');
+            // $('#viewBooksModal').modal('show');
+        }).done(function(){
+            console.log("[AJAX] Complete: JSON WSDL Lookup");
+        });
+    })
 
 </script>
 <body>
@@ -544,21 +604,54 @@
                                 <h4 class="modal-title" id="myModalLabel">Add a new book to LMS</h4>
                             </div>
                             <div class="modal-body">
-                                <!-- Add forms here -->
-<%--                                <ul class="nav nav-tabs" id="tabContent" data-tabs="tabs">--%>
+                                <ul>
+                                    <li>
+                                        <input type="text" id="addisbn"
+                                               class="field-style field-full align-none" name="isbn"
+                                               placeholder="ISBN" required style="width: 100%">
+                                    </li>
+                                    <li>
+                                        <input type="text" name="bookName" size="10" id="addname"
+                                               class="field-style field-split align-left"
+                                               placeholder="Book Name" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="text" name="writer" id="addwriter"
+                                               class="field-style field-split align-right"
+                                               placeholder="Author" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="number" min="1" name="num_of_copies" id="addcopies"
+                                               class="field-style field-split align-left"
+                                               placeholder="# of copies" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="text" name="edition" id="addedition"
+                                               class="field-style field-split align-right"
+                                               placeholder="edition" required style="width: 100%"/>
+
+
+                                    </li>
+                                    <li>
+                                        <input type="number" min="1" name="manufacturedyear" id="addyear"
+                                               class="field-style field-split align-left"
+                                               placeholder="manufactured year" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="text" name="price" id="addprice"
+                                               class="field-style field-split align-right"
+                                               placeholder="price" required style="width: 100%"/>
+
+                                    </li>
+                                    <li>
+                                        <input type="text" name="publisher" id="addpublisher"
+                                               class="field-style field-split align-right"
+                                               placeholder="publisher" required style="width: 100%"/>
+                                    </li>
 <%--                                    <li>--%>
-<%--                                        <a href="#" id="simpleadd" data-toggle="tab"--%>
-<%--                                           onclick="displayForms(this,'simpleaddform');">Add via--%>
-<%--                                            ISBN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
-<%--                                        </a>--%>
+                                        <input id="addbook" type="button" value="Add Book" onclick="addBookDetails()" />
 <%--                                    </li>--%>
-<%--                                    <li>--%>
-<%--                                        <a href="#" id="advancedadd" data-toggle="tab"--%>
-<%--                                           onclick="displayForms(this,'advancedaddform');">Advanced--%>
-<%--                                            add--%>
-<%--                                        </a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
+                                </ul>
                                 <div id="my-tab-content" class="tab-content">
                                     <div class="tab-pane active" id="a">
                                         <form:form class="form-style-9" method="post"
