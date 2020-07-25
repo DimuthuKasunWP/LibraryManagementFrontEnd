@@ -191,6 +191,40 @@
         document.getElementById(formId).style.display = "block";
     };
     $(document).ready(function () {
+        updatebookdetails=function(){
+
+            var values={
+                id:$("#updateId").val(),
+                bookName:$("#updateName").val(),
+                isbn:$("#updateIsbn").val(),
+                writer:$("#updateWriter").val(),
+                publisher:$("#updatePublisher").val(),
+                price:$("#updatePrice").val(),
+                manufacturedYear:$("#updateYear").val(),
+                num_of_copies:$("#updateCopies").val(),
+                edition:$("#updateEdition").val()
+
+            }
+            console.log("stringified values"+JSON.stringify(values));
+            values=JSON.stringify(values);
+            var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateBook";
+            $.ajax({
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                type: "PUT",
+                url: updateurl,
+                data:values
+            }).success(function(data){
+                location.reload();
+                // $("#searchBooksModal").modal('close');
+                // $('#viewBooksModal').modal('show');
+            }).done(function(){
+                console.log("[AJAX] Complete: JSON WSDL Lookup");
+            });
+
+
+        }
 
         $("#addBtn").click(function () {
             $('#addBookModal').modal('show');
@@ -256,6 +290,22 @@
                 $('#centerpagecontent').append(html);
             });
         });
+        deleteBook=function(){
+            var deleteURL = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteBook?id="+$("#updateId").val();
+            $.ajax({
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                type: "DELETE",
+                url: deleteURL
+            }).success(function(data){
+                location.reload();
+                // $("#searchBooksModal").modal('close');
+                $('#viewBooksModal').modal('show');
+            }).done(function(){
+                console.log("[AJAX] Complete: JSON WSDL Lookup");
+            });
+        }
 
         $("#viewBooksBtn").click(function () {
             getBooksData();
@@ -268,20 +318,20 @@
         updateBook = function (rowId, bookid, isbn, title, author, publisher, price, manufacturedYear, numberOfCopies, edition) {
             var html = '';
             html = html + '<br><div id="label">';
-            html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
+            // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
             html = html + '<tr id = ' + bookid + '>';
-            html = html + '<td id="td1"><input type="text" style="width: 35px"  name="bookId" value=' + bookid + '  readonly ></td>';
-            html = html + '<td id="td2"><input type="txt" style="width: 120px" name="isbn" value=\"' + isbn + '\"' + ' readonly></td>';
-            html = html + '<td id="td3"><input type="text" class="mytext" name="title" value=\"' + title + '\"' + '></td>';
-            html = html + '<td id="td4"><input type="text" class="mytext" name="author" value=\"' + author + '\"' + '></td>';
-            html = html + '<td id="td5"><input type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
-            html = html + '<td id="td6"><input type="text" class="mytext" name="location" value=\"' + price + '\"' + '></td>';
-            html = html + '<td id="td7"><input type="text" class="mytext" size="10" name="callnumber" value=\"' + manufacturedYear + '\"' + '></td>';
-            html = html + '<td id="td8"><input type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
-            html = html + '<td id="td9"><input type="text" class="mytext" name="keywords" value=\"' + edition + '\"' + '></td>';
-            html = html + '<td>' + '  <button class="btn btn-info" id=' + bookid + ' onClick="updateBook(\'' + bookid + '\',\'' + bookid + '\',\'' + isbn + '\',\'' + title + '\',\'' + author + '\',\'' + publisher + '\',\'' + price + '\',\'' + manufacturedYear + '\',\'' + numberOfCopies + '\',\'' + edition + '\')">Edit</button>' + '</td>';
+            html = html + '<td id="td1"><input id="updateId" type="text" style="width: 35px"  name="bookId" value=' + bookid + '  readonly ></td>';
+            html = html + '<td id="td2"><input id="updateIsbn" type="txt" style="width: 120px" name="isbn" value=\"' + isbn + '\"' + ' readonly></td>';
+            html = html + '<td id="td3"><input id="updateName" type="text" class="mytext" name="name" value=\"' + title + '\"' + '></td>';
+            html = html + '<td id="td4"><input id="updateWriter" type="text" class="mytext" name="writer" value=\"' + author + '\"' + '></td>';
+            html = html + '<td id="td5"><input id="updatePublisher" type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
+            html = html + '<td id="td6"><input id="updatePrice" type="text" class="mytext" name="price" value=\"' + price + '\"' + '></td>';
+            html = html + '<td id="td7"><input id="updateYear" type="text" class="mytext" size="10" name="manufacturedYear" value=\"' + manufacturedYear + '\"' + '></td>';
+            html = html + '<td id="td8"><input id="updateCopies" type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
+            html = html + '<td id="td9"><input id="updateEdition" type="text" class="mytext" name="edition" value=\"' + edition + '\"' + '></td>';
+            html = html + '<td>' + '<button  id=' + bookid+ ' onClick="updatebookdetails()"  class="btn btn-success" >Update</button><button class="btn btn-info" onclick="deleteBook()">Delete</button>' + '</td>';
             html = html + '</tr>';
-            html = html + '</form>';
+            // html = html + '</form>';
             html = html + '</div>';
             const row = $('#' + rowId);
             row.replaceWith(html);
@@ -422,6 +472,7 @@
                 html = html + '</table>';
                 html = html + '</div>';
                 mymodal.find('.modal-body').append(html);
+                // location.reload();
                 $("#searchBooksModal").modal('close');
             $('#viewBooksModal').modal('show');
 
@@ -431,6 +482,66 @@
     function clock_popup() {
         $('#datetimepicker').datetimepicker();
     }
+    })
+    addBookDetails=function(){
+        var values={
+            bookName:$("#addname").val(),
+            isbn:$("#addisbn").val(),
+            writer:$("#addwriter").val(),
+            publisher:$("#addpublisher").val(),
+            price:$("#addprice").val(),
+            manufacturedYear:$("#addyear").val(),
+            num_of_copies:$("#addcopies").val(),
+            edition:$("#addedition").val()
+
+        }
+        console.log("stringified values"+JSON.stringify(values));
+        values=JSON.stringify(values);
+        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        $.ajax({
+            headers:{
+                "Content-Type": "application/json",
+            },
+            type: "POST",
+            url: updateurl,
+            data:values
+        }).success(function(data){
+            location.reload();
+            // $("#searchBooksModal").modal('close');
+            // $('#viewBooksModal').modal('show');
+        }).done(function(){
+            console.log("[AJAX] Complete: JSON WSDL Lookup");
+        });
+    }
+    $('#addbook').click(function () {
+        var values={
+            bookName:$("#addname").val(),
+            isbn:$("#addisbn").val(),
+            writer:$("#addwriter").val(),
+            publisher:$("#addpublisher").val(),
+            price:$("#addprice").val(),
+            manufacturedYear:$("#addyear").val(),
+            num_of_copies:$("#addcopies").val(),
+            edition:$("#addedition").val()
+
+        }
+        console.log("stringified values"+JSON.stringify(values));
+        values=JSON.stringify(values);
+        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        $.ajax({
+            headers:{
+                "Content-Type": "application/json",
+            },
+            type: "PUT",
+            url: updateurl,
+            data:values
+        }).success(function(data){
+            location.reload();
+            // $("#searchBooksModal").modal('close');
+            // $('#viewBooksModal').modal('show');
+        }).done(function(){
+            console.log("[AJAX] Complete: JSON WSDL Lookup");
+        });
     })
 
 </script>
@@ -448,24 +559,6 @@
 
             <hr>
 
-<%--            <ul class="nav nav-stacked">--%>
-<%--                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#userMenu">Settings <i--%>
-<%--                        class="glyphicon glyphicon-chevron-down"></i></a>--%>
-<%--                    <ul class="nav nav-stacked collapse in" id="userMenu">--%>
-<%--                        <li class="active"><a id="homeLink" href="#"><i class="glyphicon glyphicon-home"></i> Home</a>--%>
-<%--                        </li>--%>
-<%--                        <li><a id="addBtn1" href="#"><i class="glyphicon glyphicon-plus-sign"></i> Add a Book</a></li>--%>
-<%--                        <li><a id="logsBtn" href="#"><i class="glyphicon glyphicon-flag"></i> Librarian Logs</a></li>--%>
-<%--                        <li><a id="searchBtn1" href="#"><i class="glyphicon glyphicon-search"></i> Search a Book</a>--%>
-<%--                        </li>--%>
-<%--                        &lt;%&ndash;<li><a href="#"><i class="glyphicon glyphicon-remove"></i> Remove a Book</a></li>&ndash;%&gt;--%>
-<%--                        <li><a id="viewBooksBtn1" href="#"><i class="glyphicon glyphicon-list"></i> View all books</a>--%>
-<%--                        </li>--%>
-<%--                        <li><a href="#"><i class="glyphicon glyphicon-flag"></i> Transactions</a></li>--%>
-<%--                        <li><a href="${userlogout}"><i class="glyphicon glyphicon-off"></i> Logout</a></li>--%>
-<%--                    </ul>--%>
-<%--                </li>--%>
-<%--            </ul>--%>
 
             <hr>
 
@@ -493,21 +586,54 @@
                                 <h4 class="modal-title" id="myModalLabel">Add a new book to LMS</h4>
                             </div>
                             <div class="modal-body">
-                                <!-- Add forms here -->
-<%--                                <ul class="nav nav-tabs" id="tabContent" data-tabs="tabs">--%>
+                                <ul>
+                                    <li>
+                                        <input type="text" id="addisbn"
+                                               class="field-style field-full align-none" name="isbn"
+                                               placeholder="ISBN" required style="width: 100%">
+                                    </li>
+                                    <li>
+                                        <input type="text" name="bookName" size="10" id="addname"
+                                               class="field-style field-split align-left"
+                                               placeholder="Book Name" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="text" name="writer" id="addwriter"
+                                               class="field-style field-split align-right"
+                                               placeholder="Author" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="number" min="1" name="num_of_copies" id="addcopies"
+                                               class="field-style field-split align-left"
+                                               placeholder="# of copies" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="text" name="edition" id="addedition"
+                                               class="field-style field-split align-right"
+                                               placeholder="edition" required style="width: 100%"/>
+
+
+                                    </li>
+                                    <li>
+                                        <input type="number" min="1" name="manufacturedyear" id="addyear"
+                                               class="field-style field-split align-left"
+                                               placeholder="manufactured year" required style="width: 100%"/>
+                                    </li>
+                                    <li>
+                                        <input type="text" name="price" id="addprice"
+                                               class="field-style field-split align-right"
+                                               placeholder="price" required style="width: 100%"/>
+
+                                    </li>
+                                    <li>
+                                        <input type="text" name="publisher" id="addpublisher"
+                                               class="field-style field-split align-right"
+                                               placeholder="publisher" required style="width: 100%"/>
+                                    </li>
 <%--                                    <li>--%>
-<%--                                        <a href="#" id="simpleadd" data-toggle="tab"--%>
-<%--                                           onclick="displayForms(this,'simpleaddform');">Add via--%>
-<%--                                            ISBN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
-<%--                                        </a>--%>
+                                        <input id="addbook" type="button" value="Add Book" onclick="addBookDetails()" />
 <%--                                    </li>--%>
-<%--                                    <li>--%>
-<%--                                        <a href="#" id="advancedadd" data-toggle="tab"--%>
-<%--                                           onclick="displayForms(this,'advancedaddform');">Advanced--%>
-<%--                                            add--%>
-<%--                                        </a>--%>
-<%--                                    </li>--%>
-<%--                                </ul>--%>
+                                </ul>
                                 <div id="my-tab-content" class="tab-content">
                                     <div class="tab-pane active" id="a">
                                         <form:form class="form-style-9" method="post"
@@ -648,7 +774,7 @@
 
                 <div class="modal fade" id="searchBooksModal" tabindex="-1" role="dialog"
                      aria-labelledby="myModalLabel"
-                     aria-hidden="true" style="margin-left: 33%">
+                     aria-hidden="true" style="width: 100%;height: 100%;left: 23%;margin-left: -23%;vertical-align: middle">
                     <div class="modal-dialog">
                         <div class="modal-content" id="searchBooksContent">
                             <div class="modal-header">
@@ -667,42 +793,7 @@
                                             <input type="text" name="searchWriter" id="searchWriter"
                                                    class="field-style field-split align-right" placeholder="Author "/>
                                         </li>
-<%--                                        <li>--%>
-<%--                                            <input type="text" name="author"--%>
-<%--                                                   class="field-style field-split align-left" placeholder="Author"/>--%>
-<%--                                            <input type="text" name="publisher"--%>
-<%--                                                   class="field-style field-split align-right"--%>
-<%--                                                   placeholder="Publisher"/>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <input type="text" name="year_of_publication"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="Publication Year"/>--%>
-<%--                                            <input type="text" name="location"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="Library Location"/>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <input type="number" min="1" name="num_of_copies"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="# of Copies"/>--%>
-<%--                                            <input type="text" name="callnumber" size="10"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="Call Number"/>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <select class="selectpicker" name="current_status"--%>
-<%--                                                    data-style="btn-info">--%>
-<%--                                                <option>Available</option>--%>
-<%--                                                <option>Hold</option>--%>
-<%--                                                <option>Wait-Listed</option>--%>
-<%--                                            </select>--%>
-<%--                                                &lt;%&ndash;<input type="text" name="keywords"&ndash;%&gt;--%>
-<%--                                                &lt;%&ndash;class="field-style field-full align-none"&ndash;%&gt;--%>
-<%--                                                &lt;%&ndash;placeholder="Keywords"/>&ndash;%&gt;--%>
-<%--                                        </li>--%>
 
-<%--                                        <li>--%>
                                             <input id="search" type="button" value="Search now"/>
                                         </li>
                                     </ul>
@@ -788,37 +879,6 @@
 </div>
 <!-- /Main -->
 
-<%--<footer class="text-center">Credits: This Bootstrap 3 dashboard layout is compliments of <a--%>
-<%--href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer>--%>
-
-<%--<div class="modal" id="addWidgetModal">--%>
-<%--<div class="modal-dialog">--%>
-<%--<div class="modal-content">--%>
-<%--<div class="modal-header">--%>
-<%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--%>
-<%--<h4 class="modal-title">Add Widget</h4>--%>
-<%--</div>--%>
-<%--<div class="modal-body">--%>
-<%--<p>Add a widget stuff here..</p>--%>
-<%--</div>--%>
-<%--<div class="modal-footer">--%>
-<%--<a href="#" data-dismiss="modal" class="btn">Close</a>--%>
-<%--<a href="#" class="btn btn-primary">Save changes</a>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<!-- /.modal-content -->--%>
-<%--</div>--%>
-<%--<!-- /.modal-dalog -->--%>
-<%--</div>--%>
-<!-- /.modal -->
-<!-- script references -->
-
-
-<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-<%--<script src="js/scripts.js"></script>--%>
-<%--<link rel="stylesheet" type="text/css" href="../../../resources/core/css/jquery.datetimepicker.min.css"/>--%>
-<%--<script src="../../../resources/core/js/jquery.js"></script>--%>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
