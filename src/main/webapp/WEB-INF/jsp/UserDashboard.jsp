@@ -559,24 +559,6 @@
 
             <hr>
 
-<%--            <ul class="nav nav-stacked">--%>
-<%--                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#userMenu">Settings <i--%>
-<%--                        class="glyphicon glyphicon-chevron-down"></i></a>--%>
-<%--                    <ul class="nav nav-stacked collapse in" id="userMenu">--%>
-<%--                        <li class="active"><a id="homeLink" href="#"><i class="glyphicon glyphicon-home"></i> Home</a>--%>
-<%--                        </li>--%>
-<%--                        <li><a id="addBtn1" href="#"><i class="glyphicon glyphicon-plus-sign"></i> Add a Book</a></li>--%>
-<%--                        <li><a id="logsBtn" href="#"><i class="glyphicon glyphicon-flag"></i> Librarian Logs</a></li>--%>
-<%--                        <li><a id="searchBtn1" href="#"><i class="glyphicon glyphicon-search"></i> Search a Book</a>--%>
-<%--                        </li>--%>
-<%--                        &lt;%&ndash;<li><a href="#"><i class="glyphicon glyphicon-remove"></i> Remove a Book</a></li>&ndash;%&gt;--%>
-<%--                        <li><a id="viewBooksBtn1" href="#"><i class="glyphicon glyphicon-list"></i> View all books</a>--%>
-<%--                        </li>--%>
-<%--                        <li><a href="#"><i class="glyphicon glyphicon-flag"></i> Transactions</a></li>--%>
-<%--                        <li><a href="${userlogout}"><i class="glyphicon glyphicon-off"></i> Logout</a></li>--%>
-<%--                    </ul>--%>
-<%--                </li>--%>
-<%--            </ul>--%>
 
             <hr>
 
@@ -811,42 +793,7 @@
                                             <input type="text" name="searchWriter" id="searchWriter"
                                                    class="field-style field-split align-right" placeholder="Author "/>
                                         </li>
-<%--                                        <li>--%>
-<%--                                            <input type="text" name="author"--%>
-<%--                                                   class="field-style field-split align-left" placeholder="Author"/>--%>
-<%--                                            <input type="text" name="publisher"--%>
-<%--                                                   class="field-style field-split align-right"--%>
-<%--                                                   placeholder="Publisher"/>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <input type="text" name="year_of_publication"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="Publication Year"/>--%>
-<%--                                            <input type="text" name="location"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="Library Location"/>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <input type="number" min="1" name="num_of_copies"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="# of Copies"/>--%>
-<%--                                            <input type="text" name="callnumber" size="10"--%>
-<%--                                                   class="field-style field-split align-left"--%>
-<%--                                                   placeholder="Call Number"/>--%>
-<%--                                        </li>--%>
-<%--                                        <li>--%>
-<%--                                            <select class="selectpicker" name="current_status"--%>
-<%--                                                    data-style="btn-info">--%>
-<%--                                                <option>Available</option>--%>
-<%--                                                <option>Hold</option>--%>
-<%--                                                <option>Wait-Listed</option>--%>
-<%--                                            </select>--%>
-<%--                                                &lt;%&ndash;<input type="text" name="keywords"&ndash;%&gt;--%>
-<%--                                                &lt;%&ndash;class="field-style field-full align-none"&ndash;%&gt;--%>
-<%--                                                &lt;%&ndash;placeholder="Keywords"/>&ndash;%&gt;--%>
-<%--                                        </li>--%>
 
-<%--                                        <li>--%>
                                             <input id="search" type="button" value="Search now"/>
                                         </li>
                                     </ul>
@@ -932,37 +879,6 @@
 </div>
 <!-- /Main -->
 
-<%--<footer class="text-center">Credits: This Bootstrap 3 dashboard layout is compliments of <a--%>
-<%--href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer>--%>
-
-<%--<div class="modal" id="addWidgetModal">--%>
-<%--<div class="modal-dialog">--%>
-<%--<div class="modal-content">--%>
-<%--<div class="modal-header">--%>
-<%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--%>
-<%--<h4 class="modal-title">Add Widget</h4>--%>
-<%--</div>--%>
-<%--<div class="modal-body">--%>
-<%--<p>Add a widget stuff here..</p>--%>
-<%--</div>--%>
-<%--<div class="modal-footer">--%>
-<%--<a href="#" data-dismiss="modal" class="btn">Close</a>--%>
-<%--<a href="#" class="btn btn-primary">Save changes</a>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<!-- /.modal-content -->--%>
-<%--</div>--%>
-<%--<!-- /.modal-dalog -->--%>
-<%--</div>--%>
-<!-- /.modal -->
-<!-- script references -->
-
-
-<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-<%--<script src="js/scripts.js"></script>--%>
-<%--<link rel="stylesheet" type="text/css" href="../../../resources/core/css/jquery.datetimepicker.min.css"/>--%>
-<%--<script src="../../../resources/core/js/jquery.js"></script>--%>
 <jsp:include page="footer.jsp"/>
 </body>
 </html>
