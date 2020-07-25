@@ -484,21 +484,19 @@
             $('#datetimepicker').datetimepicker();
         }
     })
-    addBookDetails=function(){
+    addReservationDetails=function(){
         var values={
             bookName:$("#addname").val(),
-            isbn:$("#addisbn").val(),
+            email:$("#addemail").val(),
             writer:$("#addwriter").val(),
-            publisher:$("#addpublisher").val(),
-            price:$("#addprice").val(),
-            manufacturedYear:$("#addyear").val(),
-            num_of_copies:$("#addcopies").val(),
-            edition:$("#addedition").val()
+            userName:$("#addusername").val(),
+            date:$("#adddate").val(),
+            validPeriod:$("#addvalidperiod").val()
 
         }
         console.log("stringified values"+JSON.stringify(values));
         values=JSON.stringify(values);
-        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/reserveBook";
         $.ajax({
             headers:{
                 "Content-Type": "application/json",
@@ -571,14 +569,14 @@
             <!-- center left-->
             <div id="centerpagecontent" class="col-md-6">
                 <div style="font-weight: bold; text-align: center; vertical-align: middle" class="well">
-                    <i class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Manage Books
+                    <i class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Manage Reservations
                 </div>
 
                 <hr>
 
                 <!-- Modal for adding books-->
                 <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                     aria-hidden="true" style="margin-left: 33%">
+                     aria-hidden="true" style="">
                     <div class="modal-dialog">
                         <div class="modal-content" id="addBookContent">
                             <div class="modal-header">
@@ -589,9 +587,14 @@
                             <div class="modal-body">
                                 <ul>
                                     <li>
-                                        <input type="text" id="addisbn"
-                                               class="field-style field-full align-none" name="isbn"
-                                               placeholder="ISBN" required style="width: 100%">
+                                        <input type="text" id="addemail"
+                                               class="field-style field-full align-none" name="email"
+                                               placeholder="E-Mail" required style="width: 100%">
+                                    </li>
+                                    <li>
+                                        <input type="text" name="useName" size="10" id="addusername"
+                                               class="field-style field-split align-left"
+                                               placeholder="User Name" required style="width: 100%"/>
                                     </li>
                                     <li>
                                         <input type="text" name="bookName" size="10" id="addname"
@@ -604,35 +607,21 @@
                                                placeholder="Author" required style="width: 100%"/>
                                     </li>
                                     <li>
-                                        <input type="number" min="1" name="num_of_copies" id="addcopies"
+                                        <input type="text" name="date" id="adddate"
                                                class="field-style field-split align-left"
-                                               placeholder="# of copies" required style="width: 100%"/>
+                                               placeholder="Borrow Date" required style="width: 100%"/>
                                     </li>
                                     <li>
-                                        <input type="text" name="edition" id="addedition"
+                                        <input type="text" name="validperiod" id="addvalidperiod"
                                                class="field-style field-split align-right"
-                                               placeholder="edition" required style="width: 100%"/>
+                                               placeholder="Valid Date Period" required style="width: 100%"/>
 
 
                                     </li>
-                                    <li>
-                                        <input type="number" min="1" name="manufacturedyear" id="addyear"
-                                               class="field-style field-split align-left"
-                                               placeholder="manufactured year" required style="width: 100%"/>
-                                    </li>
-                                    <li>
-                                        <input type="text" name="price" id="addprice"
-                                               class="field-style field-split align-right"
-                                               placeholder="price" required style="width: 100%"/>
 
-                                    </li>
-                                    <li>
-                                        <input type="text" name="publisher" id="addpublisher"
-                                               class="field-style field-split align-right"
-                                               placeholder="publisher" required style="width: 100%"/>
-                                    </li>
+
                                     <%--                                    <li>--%>
-                                    <input id="addbook" type="button" value="Add Book" onclick="addBookDetails()" />
+                                    <input  type="button" value="Add Book" onclick="addReservationDetails()" />
                                     <%--                                    </li>--%>
                                 </ul>
                                 <div id="my-tab-content" class="tab-content">
@@ -830,41 +819,42 @@
                 <hr>
 
                 <div id="reportsdata" class="panel panel-default">
+<%--                    <img src="../../webapp/resources/core/librarymanagement.png"/>--%>
                     <div class="panel-heading">
-                        <h4>Reports</h4></div>
+<%--                        <h4>Reports</h4></div>--%>
+                    <img style="width: 800px;text-align:center" src="https://firebasestorage.googleapis.com/v0/b/chat-app-71bd1.appspot.com/o/librarymanagement.png?alt=media&token=f94d56fd-5acc-4b1c-b0a2-63161cf2f71f"/>
+<%--                    <div class="panel-body">--%>
 
-                    <div class="panel-body">
-
-                        <small>Available</small>
-                        <div class="progress">
-                            <div id="availablecount" class="progress-bar progress-bar-success" role="progressbar"
-                                 aria-valuenow=${availablecount} aria-valuemin="0" aria-valuemax="100"
-                                 style="width: 70%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <small>Hold</small>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
-                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                <span class="sr-only">20% Complete</span>
-                            </div>
-                        </div>
-                        <small>WaitListed</small>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                <span id="" class="sr-only">60% Complete (warning)</span>
-                            </div>
-                        </div>
-                        <small>Failures</small>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">80% Complete</span>
-                            </div>
-                        </div>
-                    </div>
+<%--                        <small>Available</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div id="availablecount" class="progress-bar progress-bar-success" role="progressbar"--%>
+<%--                                 aria-valuenow=${availablecount} aria-valuemin="0" aria-valuemax="100"--%>
+<%--                                 style="width: 70%">--%>
+<%--                                <span class="sr-only"></span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <small>Hold</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"--%>
+<%--                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">--%>
+<%--                                <span class="sr-only">20% Complete</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <small>WaitListed</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"--%>
+<%--                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%">--%>
+<%--                                <span id="" class="sr-only">60% Complete (warning)</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <small>Failures</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"--%>
+<%--                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%">--%>
+<%--                                <span class="sr-only">80% Complete</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <!--/panel-body-->
                 </div>
                 <!--/panel-->

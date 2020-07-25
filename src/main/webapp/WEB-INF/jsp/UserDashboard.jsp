@@ -830,40 +830,41 @@
 
                 <div id="reportsdata" class="panel panel-default">
                     <div class="panel-heading">
-                        <h4>Reports</h4></div>
+<%--                        <h4>Reports</h4></div>--%>
+                    <img style="width: 800px;text-align: center" src="https://firebasestorage.googleapis.com/v0/b/chat-app-71bd1.appspot.com/o/librarymanagement.png?alt=media&token=f94d56fd-5acc-4b1c-b0a2-63161cf2f71f"/>
 
-                    <div class="panel-body">
+<%--                    <div class="panel-body">--%>
 
-                        <small>Available</small>
-                        <div class="progress">
-                            <div id="availablecount" class="progress-bar progress-bar-success" role="progressbar"
-                                 aria-valuenow=${availablecount} aria-valuemin="0" aria-valuemax="100"
-                                 style="width: 70%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <small>Hold</small>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
-                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                <span class="sr-only">20% Complete</span>
-                            </div>
-                        </div>
-                        <small>WaitListed</small>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                <span id="" class="sr-only">60% Complete (warning)</span>
-                            </div>
-                        </div>
-                        <small>Failures</small>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">80% Complete</span>
-                            </div>
-                        </div>
-                    </div>
+<%--                        <small>Available</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div id="availablecount" class="progress-bar progress-bar-success" role="progressbar"--%>
+<%--                                 aria-valuenow=${availablecount} aria-valuemin="0" aria-valuemax="100"--%>
+<%--                                 style="width: 70%">--%>
+<%--                                <span class="sr-only"></span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <small>Hold</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"--%>
+<%--                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">--%>
+<%--                                <span class="sr-only">20% Complete</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <small>WaitListed</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"--%>
+<%--                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%">--%>
+<%--                                <span id="" class="sr-only">60% Complete (warning)</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <small>Failures</small>--%>
+<%--                        <div class="progress">--%>
+<%--                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"--%>
+<%--                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%">--%>
+<%--                                <span class="sr-only">80% Complete</span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <!--/panel-body-->
                 </div>
                 <!--/panel-->
