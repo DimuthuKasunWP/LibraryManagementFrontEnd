@@ -12,8 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class BookController {
 
     @GetMapping(path = "/")
-    @CrossOrigin
     public ModelAndView welcome(){
         return new ModelAndView("UserDashboard");
+    }
+
+    @GetMapping(path = "/reservations")
+    public ModelAndView reservations(){
+        return new ModelAndView("ReservationDashBoard");
     }
 }
