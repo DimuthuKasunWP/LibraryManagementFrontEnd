@@ -192,23 +192,21 @@
         document.getElementById(formId).style.display = "block";
     };
     $(document).ready(function () {
-        updatebookdetails=function(){
+        updateReservationdetails=function(){
 
             var values={
                 id:$("#updateId").val(),
                 bookName:$("#updateName").val(),
-                isbn:$("#updateIsbn").val(),
+                email:$("#updateEmail").val(),
                 writer:$("#updateWriter").val(),
-                publisher:$("#updatePublisher").val(),
-                price:$("#updatePrice").val(),
-                manufacturedYear:$("#updateYear").val(),
-                num_of_copies:$("#updateCopies").val(),
-                edition:$("#updateEdition").val()
+                userName:$("#updateUserName").val(),
+                date:$("#updateDate").val(),
+                validPeriod:$("#updatevalidPeriod").val()
 
             }
             console.log("stringified values"+JSON.stringify(values));
             values=JSON.stringify(values);
-            var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateBook";
+            var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateReservation";
             $.ajax({
                 headers:{
                     "Content-Type": "application/json",
@@ -292,7 +290,7 @@
             });
         });
         deleteBook=function(){
-            var deleteURL = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteBook?id="+$("#updateId").val();
+            var deleteURL = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteReservation?id="+$("#updateId").val();
             $.ajax({
                 headers:{
                     "Content-Type": "application/json",
@@ -316,21 +314,21 @@
             getBooksData();
             $('#viewBooksModal').modal('show');
         });
-        updateBook = function (rowId, bookid, isbn, title, author, publisher, price, manufacturedYear, numberOfCopies, edition) {
+        updateBook = function (rowId, reserveId, email, bookName, author, date, validPeriod, userName) {
             var html = '';
             html = html + '<br><div id="label">';
             // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
-            html = html + '<tr id = ' + bookid + '>';
-            html = html + '<td id="td1"><input id="updateId" type="text" style="width: 35px"  name="bookId" value=' + bookid + '  readonly ></td>';
-            html = html + '<td id="td2"><input id="updateIsbn" type="txt" style="width: 120px" name="isbn" value=\"' + isbn + '\"' + ' readonly></td>';
-            html = html + '<td id="td3"><input id="updateName" type="text" class="mytext" name="name" value=\"' + title + '\"' + '></td>';
+            html = html + '<tr id = ' + reserveId + '>';
+            html = html + '<td id="td1"><input id="updateId" type="text" style="width: 35px"  name="reserveId" value=' + reserveId + '  readonly ></td>';
+            html = html + '<td id="td2"><input id="updateEmail" type="txt" style="width: 120px" name="email" value=\"' + email + '\"' + ' readonly></td>';
+            html = html + '<td id="td3"><input id="updateName" type="text" class="mytext" name="name" value=\"' + bookName + '\"' + '></td>';
             html = html + '<td id="td4"><input id="updateWriter" type="text" class="mytext" name="writer" value=\"' + author + '\"' + '></td>';
-            html = html + '<td id="td5"><input id="updatePublisher" type="text" class="mytext" name="publisher" value=\"' + publisher + '\"' + '></td>';
-            html = html + '<td id="td6"><input id="updatePrice" type="text" class="mytext" name="price" value=\"' + price + '\"' + '></td>';
-            html = html + '<td id="td7"><input id="updateYear" type="text" class="mytext" size="10" name="manufacturedYear" value=\"' + manufacturedYear + '\"' + '></td>';
-            html = html + '<td id="td8"><input id="updateCopies" type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
-            html = html + '<td id="td9"><input id="updateEdition" type="text" class="mytext" name="edition" value=\"' + edition + '\"' + '></td>';
-            html = html + '<td>' + '<button  id=' + bookid+ ' onClick="updatebookdetails()"  class="btn btn-success" >Update</button><button class="btn btn-info" onclick="deleteBook()">Delete</button>' + '</td>';
+            html = html + '<td id="td5"><input id="updateDate" type="text" class="mytext" name="date" value=\"' + date + '\"' + '></td>';
+            html = html + '<td id="td6"><input id="updatevalidPeriod" type="text" class="mytext" name="validPeriod" value=\"' + validPeriod + '\"' + '></td>';
+            html = html + '<td id="td7"><input id="updateUserName" type="text" class="mytext" size="10" name="userName" value=\"' + userName + '\"' + '></td>';
+            // html = html + '<td id="td8"><input id="updateCopies" type="number" min="0" class="mytext" name="num_of_copies" value=' + numberOfCopies + '></td>';
+            // html = html + '<td id="td9"><input id="updateEdition" type="text" class="mytext" name="edition" value=\"' + edition + '\"' + '></td>';
+            html = html + '<td>' + '<button  id=' + reserveId+ ' onClick="updateReservationdetails()"  class="btn btn-success" >Update</button><button class="btn btn-info" onclick="deleteBook()">Delete</button>' + '</td>';
             html = html + '</tr>';
             // html = html + '</form>';
             html = html + '</div>';
@@ -338,45 +336,73 @@
             row.replaceWith(html);
         };
         getBooksData = function () {
-            var url = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
+            var url = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservations";
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks",
+                url: "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservations",
             }).success(function(data){
-                var jsondata = JSON.parse(data);
-
+                console.log("inside reservation data");
+                console.log("data"+data);
                 var mymodal = $('#viewBooksModal');
                 mymodal.find('.modal-body').text('');
+                // var jsonData = data;
+                // let html = '<br><br><br><div class="table-responsive">' +
+                //     '<table class="table">' +
+                //     '<thead>' +
+                //     '<tr>' +
+                //     '<th>ID </th>' +
+                //     '<th>Email </th>' +
+                //     '<th>Book Name </th>' +
+                //     '<th>Writer </th>' +
+                //     '<th>Date </th>' +
+                //     '<th>Valid Period </th>' +
+                //     '<th>User Name </th>' +
+                //     '<th align="center" >Actions</th>' +
+                //     '</tr>';
+                // for (i = 0; i < jsonData.length; i++) {
+                //     //console.log("title string"+JSON.stringify(jsonData[i]));
+                //     html = html + '<tr id = ' + jsonData[i].id + '>';
+                //     html = html + '<td >' + jsonData[i].id + '</td>';
+                //     html = html + '<td>' + jsonData[i].email + '</td>';
+                //     html = html + '<td>' + jsonData[i].book.bookName + '</td>';
+                //     html = html + '<td>' + jsonData[i].book.writer + '</td>';
+                //     html = html + '<td>' + jsonData[i].date + '</td>';
+                //     html = html + '<td>' + jsonData[i].validPeriod + '</td>';
+                //     html = html + '<td>' + jsonData[i].userName + '</td>';
+                //     var singleObj = jsonData[i];
+                //     html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].email + '\',\'' + jsonData[i].book.bookName + '\',\'' + jsonData[i].book.writer + '\',\'' + jsonData[i].date + '\',\'' + jsonData[i].validPeriod + '\',\'' + jsonData[i].userName +  '\')">Edit</button> ' + '</td>';
+                //     html = html + '</tr>';
+                // }
+                // html = html + '</table>';
+                // html = html + '</div>';
+                // mymodal.find('.modal-body').append(html);
                 var jsonData = data;
-                let html = '<br><br><br><div class="table-responsive">' +
+                var html = '<br><br><br><div class="table-responsive">' +
                     '<table class="table">' +
                     '<thead>' +
                     '<tr>' +
                     '<th>ID </th>' +
-                    '<th>ISBN </th>' +
+                    '<th>Email </th>' +
                     '<th>Book Name </th>' +
                     '<th>Writer </th>' +
-                    '<th>Publisher </th>' +
-                    '<th>Price </th>' +
-                    '<th>Year </th>' +
-                    '<th>No. of copies </th>' +
-                    '<th>Edition</th>' +
+                    '<th>Date </th>' +
+                    '<th>Valid Period </th>' +
+                    '<th>User Name </th>' +
                     '<th align="center" >Actions</th>' +
                     '</tr>';
                 for (i = 0; i < jsonData.length; i++) {
                     //console.log("title string"+JSON.stringify(jsonData[i]));
                     html = html + '<tr id = ' + jsonData[i].id + '>';
                     html = html + '<td >' + jsonData[i].id + '</td>';
-                    html = html + '<td>' + jsonData[i].isbn + '</td>';
-                    html = html + '<td>' + jsonData[i].bookName + '</td>';
-                    html = html + '<td>' + jsonData[i].writer + '</td>';
-                    html = html + '<td>' + jsonData[i].publisher + '</td>';
-                    html = html + '<td>' + jsonData[i].price + '</td>';
-                    html = html + '<td>' + jsonData[i].manufacturedYear + '</td>';
-                    html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
-                    html = html + '<td>' + jsonData[i].edition + '</td>';
+                    html = html + '<td>' + jsonData[i].email + '</td>';
+                    html = html + '<td>' + jsonData[i].book.bookName + '</td>';
+                    html = html + '<td>' + jsonData[i].book.writer + '</td>';
+                    html = html + '<td>' + jsonData[i].date + '</td>';
+                    html = html + '<td>' + jsonData[i].validPeriod + '</td>';
+                    html = html + '<td>' + jsonData[i].userName + '</td>';
+
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].email + '\',\'' + jsonData[i].book.bookName + '\',\'' + jsonData[i].book.writer + '\',\'' + jsonData[i].date + '\',\'' + jsonData[i].validPeriod + '\',\'' + jsonData[i].userName + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -386,46 +412,44 @@
                 console.log("[AJAX] Complete: JSON WSDL Lookup");
             });
 
-            $.get(url, null, function (data) {
-
-                var mymodal = $('#viewBooksModal');
-                mymodal.find('.modal-body').text('');
-                var jsonData = data;
-                var html = '<br><br><br><div class="table-responsive">' +
-                    '<table class="table">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th>ID </th>' +
-                    '<th>ISBN </th>' +
-                    '<th>Book Name </th>' +
-                    '<th>Writer </th>' +
-                    '<th>Publisher </th>' +
-                    '<th>Price </th>' +
-                    '<th>Year </th>' +
-                    '<th>No. of copies </th>' +
-                    '<th>Edition</th>' +
-                    '<th align="center" >Actions</th>' +
-                    '</tr>';
-                for (i = 0; i < jsonData.length; i++) {
-                    //console.log("title string"+JSON.stringify(jsonData[i]));
-                    html = html + '<tr id = ' + jsonData[i].id + '>';
-                    html = html + '<td >' + jsonData[i].id + '</td>';
-                    html = html + '<td>' + jsonData[i].isbn + '</td>';
-                    html = html + '<td>' + jsonData[i].bookName + '</td>';
-                    html = html + '<td>' + jsonData[i].writer + '</td>';
-                    html = html + '<td>' + jsonData[i].publisher + '</td>';
-                    html = html + '<td>' + jsonData[i].price + '</td>';
-                    html = html + '<td>' + jsonData[i].manufacturedYear + '</td>';
-                    html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
-                    html = html + '<td>' + jsonData[i].edition + '</td>';
-                    var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
-                    html = html + '</tr>';
-                }
-                html = html + '</table>';
-                html = html + '</div>';
-                mymodal.find('.modal-body').append(html);
-            });
+            // $.get(url, null, function (data) {
+            //
+            //     var jsondata = JSON.parse(data);
+            //
+            //     var mymodal = $('#viewBooksModal');
+            //     mymodal.find('.modal-body').text('');
+            //     var jsonData = data;
+            //     let html = '<br><br><br><div class="table-responsive">' +
+            //         '<table class="table">' +
+            //         '<thead>' +
+            //         '<tr>' +
+            //         '<th>ID </th>' +
+            //         '<th>Email </th>' +
+            //         '<th>Book Name </th>' +
+            //         '<th>Writer </th>' +
+            //         '<th>Date </th>' +
+            //         '<th>Valid Period </th>' +
+            //         '<th>User Name </th>' +
+            //         '<th align="center" >Actions</th>' +
+            //         '</tr>';
+            //     for (i = 0; i < jsonData.length; i++) {
+            //         //console.log("title string"+JSON.stringify(jsonData[i]));
+            //         html = html + '<tr id = ' + jsonData[i].id + '>';
+            //         html = html + '<td >' + jsonData[i].id + '</td>';
+            //         html = html + '<td>' + jsonData[i].email + '</td>';
+            //         html = html + '<td>' + jsonData[i].book.bookName + '</td>';
+            //         html = html + '<td>' + jsonData[i].book.writer + '</td>';
+            //         html = html + '<td>' + jsonData[i].date + '</td>';
+            //         html = html + '<td>' + jsonData[i].validPeriod + '</td>';
+            //         html = html + '<td>' + jsonData[i].userName + '</td>';
+            //         var singleObj = jsonData[i];
+            //         html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].email + '\',\'' + jsonData[i].book.bookName + '\',\'' + jsonData[i].book.writer + '\',\'' + jsonData[i].date + '\',\'' + jsonData[i].validPeriod + '\',\'' + jsonData[i].userName +  '\')">Edit</button> ' + '</td>';
+            //         html = html + '</tr>';
+            //     }
+            //     html = html + '</table>';
+            //     html = html + '</div>';
+            //     mymodal.find('.modal-body').append(html);
+            // });
         };
         $("#searchBtn").click(function () {
             $('#searchBooksModal').modal('show');
@@ -434,7 +458,7 @@
             $('#searchBooksModal').modal('show');
         });
         $("#search").click(function () {
-            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getBookByNW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val();
+            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservationByENW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val()+"&email="+$('#searchEmail').val();
             $.get(url, null, function (data) {
                 var mymodal = $('#searchBooksModal');
                 mymodal.find('.modal-body').text('');
@@ -444,30 +468,27 @@
                     '<thead>' +
                     '<tr>' +
                     '<th>ID </th>' +
-                    '<th>ISBN </th>' +
+                    '<th>Email </th>' +
                     '<th>Book Name </th>' +
                     '<th>Writer </th>' +
-                    '<th>Publisher </th>' +
-                    '<th>Price </th>' +
-                    '<th>Year </th>' +
-                    '<th>No. of copies </th>' +
-                    '<th>Edition</th>' +
-                    '<th align="center" >Actions</th>' +
+                    '<th>Date </th>' +
+                    '<th>Valid Period </th>' +
+                    '<th>User Name </th>' +
+                    // '<th align="center" >Actions</th>' +
                     '</tr>';
                 for (i = 0; i < jsonData.length; i++) {
                     //console.log("title string"+JSON.stringify(jsonData[i]));
                     html = html + '<tr id = ' + jsonData[i].id + '>';
                     html = html + '<td >' + jsonData[i].id + '</td>';
-                    html = html + '<td>' + jsonData[i].isbn + '</td>';
-                    html = html + '<td>' + jsonData[i].bookName + '</td>';
-                    html = html + '<td>' + jsonData[i].writer + '</td>';
-                    html = html + '<td>' + jsonData[i].publisher + '</td>';
-                    html = html + '<td>' + jsonData[i].price + '</td>';
-                    html = html + '<td>' + jsonData[i].manufacturedYear + '</td>';
-                    html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
-                    html = html + '<td>' + jsonData[i].edition + '</td>';
+                    html = html + '<td>' + jsonData[i].email + '</td>';
+                    html = html + '<td>' + jsonData[i].book.bookName + '</td>';
+                    html = html + '<td>' + jsonData[i].book.writer + '</td>';
+                    html = html + '<td>' + jsonData[i].date + '</td>';
+                    html = html + '<td>' + jsonData[i].validPeriod + '</td>';
+                    html = html + '<td>' + jsonData[i].userName + '</td>';
+
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    // html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].email + '\',\'' + jsonData[i].book.bookName + '\',\'' + jsonData[i].book.writer + '\',\'' + jsonData[i].date + '\',\'' + jsonData[i].validPeriod + '\',\'' + jsonData[i].userName + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
@@ -512,36 +533,36 @@
             console.log("[AJAX] Complete: JSON WSDL Lookup");
         });
     }
-    $('#addbook').click(function () {
-        var values={
-            bookName:$("#addname").val(),
-            isbn:$("#addisbn").val(),
-            writer:$("#addwriter").val(),
-            publisher:$("#addpublisher").val(),
-            price:$("#addprice").val(),
-            manufacturedYear:$("#addyear").val(),
-            num_of_copies:$("#addcopies").val(),
-            edition:$("#addedition").val()
-
-        }
-        console.log("stringified values"+JSON.stringify(values));
-        values=JSON.stringify(values);
-        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
-        $.ajax({
-            headers:{
-                "Content-Type": "application/json",
-            },
-            type: "PUT",
-            url: updateurl,
-            data:values
-        }).success(function(data){
-            location.reload();
-            // $("#searchBooksModal").modal('close');
-            // $('#viewBooksModal').modal('show');
-        }).done(function(){
-            console.log("[AJAX] Complete: JSON WSDL Lookup");
-        });
-    })
+    // $('#addbook').click(function () {
+    //     var values={
+    //         bookName:$("#addname").val(),
+    //         isbn:$("#addisbn").val(),
+    //         writer:$("#addwriter").val(),
+    //         publisher:$("#addpublisher").val(),
+    //         price:$("#addprice").val(),
+    //         manufacturedYear:$("#addyear").val(),
+    //         num_of_copies:$("#addcopies").val(),
+    //         edition:$("#addedition").val()
+    //
+    //     }
+    //     console.log("stringified values"+JSON.stringify(values));
+    //     values=JSON.stringify(values);
+    //     var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+    //     $.ajax({
+    //         headers:{
+    //             "Content-Type": "application/json",
+    //         },
+    //         type: "PUT",
+    //         url: updateurl,
+    //         data:values
+    //     }).success(function(data){
+    //         location.reload();
+    //         // $("#searchBooksModal").modal('close');
+    //         // $('#viewBooksModal').modal('show');
+    //     }).done(function(){
+    //         console.log("[AJAX] Complete: JSON WSDL Lookup");
+    //     });
+    // })
 
 </script>
 <body>
@@ -741,7 +762,7 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"
                                         aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="viewbooksmodalid">List of all the books in Library</h4>
+                                <h4 class="modal-title" id="viewbooksmodalid">List of all the Reservations in Library</h4>
                             </div>
                             <div class="modal-body">
                                 <c:forEach var="book" items="${books}">
@@ -770,7 +791,7 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"
                                         aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="searchbooksmodalid">Search Books</h4>
+                                <h4 class="modal-title" id="searchbooksmodalid">Search Reservations</h4>
                             </div>
                             <div class="modal-body">
                                 <form:form class="form-style-9" method="post"
@@ -783,8 +804,14 @@
                                             <input type="text" name="searchWriter" id="searchWriter"
                                                    class="field-style field-split align-right" placeholder="Author "/>
                                         </li>
+                                        <li>
+                                            <input type="text" name="searchEmail" id="searchEmail" style="width:100%"
+                                                   class="field-style field-split align-right" placeholder="Email "/>
 
-                                        <input id="search" type="button" value="Search now"/>
+
+                                        </li>
+                                        <li>
+                                            <input id="search" type="button" value="Search now"/>
                                         </li>
                                     </ul>
                                 </form:form>

@@ -342,7 +342,7 @@
                 type: "GET",
                 url: "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks",
             }).success(function(data){
-                var jsondata = JSON.parse(data);
+                // var jsondata = JSON.parse(data);
 
                 var mymodal = $('#viewBooksModal');
                 mymodal.find('.modal-body').text('');
@@ -451,7 +451,7 @@
                     '<th>Year </th>' +
                     '<th>No. of copies </th>' +
                     '<th>Edition</th>' +
-                    '<th align="center" >Actions</th>' +
+                    // '<th align="center" >Actions</th>' +
                     '</tr>';
                 for (i = 0; i < jsonData.length; i++) {
                     //console.log("title string"+JSON.stringify(jsonData[i]));
@@ -466,7 +466,7 @@
                     html = html + '<td>' + jsonData[i].num_of_copies + '</td>';
                     html = html + '<td>' + jsonData[i].edition + '</td>';
                     var singleObj = jsonData[i];
-                    html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
+                    // html = html + '<td>' + '  <button class="btn btn-info" id=' + jsonData[i].id + ' onClick="updateBook(\'' + jsonData[i].id + '\',\'' + jsonData[i].id + '\',\'' + jsonData[i].isbn + '\',\'' + jsonData[i].bookName + '\',\'' + jsonData[i].writer + '\',\'' + jsonData[i].publisher + '\',\'' + jsonData[i].price + '\',\'' + jsonData[i].manufacturedYear + '\',\'' + jsonData[i].num_of_copies + '\',\'' + jsonData[i].edition + '\')">Edit</button> ' + '</td>';
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
