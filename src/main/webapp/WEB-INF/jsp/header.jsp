@@ -16,7 +16,7 @@
     }
 
     $("#reservationbtn").click(function () {
-    window.location.replace("http://localhost:8081/LibraryManagementFrontEnd-0.0.1-SNAPSHOT/user/reservations");
+    window.location.replace("http://localhost:8080/LibraryManagementFrontEnd-0.0.1-SNAPSHOT/user/reservations");
     })
 </script>
 
@@ -30,7 +30,7 @@
                 <a style="color:white;" class="navbar-brand" onclick="" >Library Management System</a>
 <%--            </div>--%>
 <%--          <div class="col-md-4">--%>
-              <a  style="padding-left:70%;color: white" class="navbar-brand" href="http://localhost:8081/LibraryManagementFrontEnd-0.0.1-SNAPSHOT/user/reservations" >    <button class="btn-info" id="reservationbtn" onclick="">Reservation</button></a>
+              <a  style="padding-left:70%;color: white" class="navbar-brand" href="http://localhost:8080/LibraryManagementFrontEnd-0.0.1-SNAPSHOT/user/reservations" >    <button class="btn-info" id="reservationbtn" onclick="">Reservation</button></a>
 <%--          </div>--%>
             <%--        <button id="reservationbtn" onclick="changeScreen()"></button>--%>
 
