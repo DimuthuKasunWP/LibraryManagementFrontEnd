@@ -47,7 +47,7 @@
 <script>
 
     $(document).ready(function () {
-        var myUrl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
+        var myUrl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
 
 
 

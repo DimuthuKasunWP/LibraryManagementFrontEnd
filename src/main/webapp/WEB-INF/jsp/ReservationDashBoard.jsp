@@ -206,7 +206,7 @@
             }
             console.log("stringified values"+JSON.stringify(values));
             values=JSON.stringify(values);
-            var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateReservation";
+            var updateurl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateReservation";
             $.ajax({
                 headers:{
                     "Content-Type": "application/json",
@@ -290,7 +290,7 @@
             });
         });
         deleteBook=function(){
-            var deleteURL = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteReservation?id="+$("#updateId").val();
+            var deleteURL = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteReservation?id="+$("#updateId").val();
             $.ajax({
                 headers:{
                     "Content-Type": "application/json",
@@ -317,7 +317,7 @@
         updateBook = function (rowId, reserveId, email, bookName, author, date, validPeriod, userName) {
             var html = '';
             html = html + '<br><div id="label">';
-            // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
+            // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8080/LibraryManagement_war/api/v1//updateBook">';
             html = html + '<tr id = ' + reserveId + '>';
             html = html + '<td id="td1"><input id="updateId" type="text" style="width: 35px"  name="reserveId" value=' + reserveId + '  readonly ></td>';
             html = html + '<td id="td2"><input id="updateEmail" type="txt" style="width: 120px" name="email" value=\"' + email + '\"' + ' readonly></td>';
@@ -336,10 +336,10 @@
             row.replaceWith(html);
         };
         getBooksData = function () {
-            var url = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservations";
+            var url = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservations";
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservations",
+                url: "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservations",
             }).success(function(data){
                 console.log("inside reservation data");
                 console.log("data"+data);
@@ -458,7 +458,7 @@
             $('#searchBooksModal').modal('show');
         });
         $("#search").click(function () {
-            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservationByENW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val()+"&email="+$('#searchEmail').val();
+            var url ="http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getReservationByENW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val()+"&email="+$('#searchEmail').val();
             $.get(url, null, function (data) {
                 var mymodal = $('#searchBooksModal');
                 mymodal.find('.modal-body').text('');
@@ -517,7 +517,7 @@
         }
         console.log("stringified values"+JSON.stringify(values));
         values=JSON.stringify(values);
-        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/reserveBook";
+        var updateurl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/reserveBook";
         $.ajax({
             headers:{
                 "Content-Type": "application/json",
@@ -547,7 +547,7 @@
     //     }
     //     console.log("stringified values"+JSON.stringify(values));
     //     values=JSON.stringify(values);
-    //     var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+    //     var updateurl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
     //     $.ajax({
     //         headers:{
     //             "Content-Type": "application/json",

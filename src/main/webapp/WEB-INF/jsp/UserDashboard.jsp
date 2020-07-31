@@ -207,7 +207,7 @@
             }
             console.log("stringified values"+JSON.stringify(values));
             values=JSON.stringify(values);
-            var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateBook";
+            var updateurl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/updateBook";
             $.ajax({
                 headers:{
                     "Content-Type": "application/json",
@@ -291,7 +291,7 @@
             });
         });
         deleteBook=function(){
-            var deleteURL = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteBook?id="+$("#updateId").val();
+            var deleteURL = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/deleteBook?id="+$("#updateId").val();
             $.ajax({
                 headers:{
                     "Content-Type": "application/json",
@@ -318,7 +318,7 @@
         updateBook = function (rowId, bookid, isbn, title, author, publisher, price, manufacturedYear, numberOfCopies, edition) {
             var html = '';
             html = html + '<br><div id="label">';
-            // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8081/LibraryManagement_war/api/v1//updateBook">';
+            // html = html + '<form class="form-group"  id="updatebookform"  method="post"  modelAttribute="book" action="http://localhost:8080/LibraryManagement_war/api/v1//updateBook">';
             html = html + '<tr id = ' + bookid + '>';
             html = html + '<td id="td1"><input id="updateId" type="text" style="width: 35px"  name="bookId" value=' + bookid + '  readonly ></td>';
             html = html + '<td id="td2"><input id="updateIsbn" type="txt" style="width: 120px" name="isbn" value=\"' + isbn + '\"' + ' readonly></td>';
@@ -337,10 +337,10 @@
             row.replaceWith(html);
         };
         getBooksData = function () {
-            var url = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
+            var url = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks";
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks",
+                url: "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getAllBooks",
             }).success(function(data){
                 // var jsondata = JSON.parse(data);
 
@@ -433,7 +433,7 @@
             $('#searchBooksModal').modal('show');
         });
         $("#search").click(function () {
-            var url ="http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getBookByNW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val();
+            var url ="http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/getBookByNW?name="+$("#searchName").val()+"&writer="+$('#searchWriter').val();
             $.get(url, null, function (data) {
                 var mymodal = $('#searchBooksModal');
                 mymodal.find('.modal-body').text('');
@@ -497,7 +497,7 @@
         }
         console.log("stringified values"+JSON.stringify(values));
         values=JSON.stringify(values);
-        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        var updateurl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
         $.ajax({
             headers:{
                 "Content-Type": "application/json",
@@ -527,7 +527,7 @@
         }
         console.log("stringified values"+JSON.stringify(values));
         values=JSON.stringify(values);
-        var updateurl = "http://localhost:8081/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
+        var updateurl = "http://localhost:8080/LibraryManagement-0.0.1-SNAPSHOT/api/v1/addBook";
         $.ajax({
             headers:{
                 "Content-Type": "application/json",
